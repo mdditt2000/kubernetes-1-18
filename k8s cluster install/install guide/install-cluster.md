@@ -1,4 +1,4 @@
-# Install Kubernetes Cluster using kubeadm
+# Install kubernetes 1.16 cluster using kubeadm
 Follow this documentation to set up a Kubernetes cluster on __RHEL 7__ Virtual machines.
 
 This documentation guides you in setting up a cluster with one master node and one worker node.
