@@ -9,10 +9,9 @@ Get these files from https://github.com/justmeandopensource/kubernetes/tree/mast
 ```
 ##### Modify kubernetes-dashboard yaml 
 Create kubernetes-dashboard. Change type to NodePort and add listener port
-
 ```
 # ------------------- Dashboard Service ------------------- #
-
+```
 kind: Service
 apiVersion: v1
 metadata:
@@ -33,6 +32,7 @@ spec:
 ```
 kubectl create -f kubernetes-dashboard.yaml 
 ```
+```
 ##### Check cluster information 
 [kube@k8s-1-16-master install guide]$ kubectl get services --all-namespaces
 NAMESPACE              NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
@@ -40,6 +40,7 @@ default                kubernetes                  ClusterIP   10.96.0.1        
 kube-system            kube-dns                    ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP   19h
 kubernetes-dashboard   dashboard-metrics-scraper   ClusterIP   10.104.232.16    <none>        8000/TCP                 4m34s
 kubernetes-dashboard   kubernetes-dashboard        NodePort    10.105.221.248   <none>        443:32323/TCP            4m34s
+```
 
 Connect to the dashboard https://192.168.200.86:32323
 
