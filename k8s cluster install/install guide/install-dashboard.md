@@ -20,11 +20,11 @@ metadata:
   name: kubernetes-dashboard
   namespace: kube-system
 spec:
-  type: NodePort -- **changed from cluster port**
+  type: NodePort -- changed from cluster port
   ports:
     - port: 443
       targetPort: 8443
-      nodePort: 32323  -- **added listener port**
+      nodePort: 32323  -- added listener port
   selector:
     k8s-app: kubernetes-dashboard   
 ```
@@ -64,22 +64,23 @@ Events:              <none>
 ```
 ###### Get token to access the dashboard
 ```
-[kube@k8s-1-13-master root]$ kubectl describe sa dashboard-admin -n kube-system
+[kube@k8s-1-16-master install guide]$ kubectl describe sa dashboard-admin -n kube-system
 Name:                dashboard-admin
 Namespace:           kube-system
 Labels:              <none>
 Annotations:         <none>
 Image pull secrets:  <none>
-Mountable secrets:   dashboard-admin-token-h5pvx
-Tokens:              dashboard-admin-token-h5pvx
+Mountable secrets:   dashboard-admin-token-t8vcl
+Tokens:              dashboard-admin-token-t8vcl
 Events:              <none>
-
-kubectl describe secret dashboard-admin-token-h5pvx -n kube-system
-Name:         dashboard-admin-token-h5pvx
+```
+```
+[kube@k8s-1-16-master install guide]$ kubectl describe secret dashboard-admin-token-t8vcl -n kube-system
+Name:         dashboard-admin-token-t8vcl
 Namespace:    kube-system
 Labels:       <none>
 Annotations:  kubernetes.io/service-account.name: dashboard-admin
-              kubernetes.io/service-account.uid: 24576691-186d-11e9-9f7d-005056bb599e
+              kubernetes.io/service-account.uid: d4244343-941f-4312-9de3-3b145322eb16
 
 Type:  kubernetes.io/service-account-token
 
@@ -87,5 +88,6 @@ Data
 ====
 ca.crt:     1025 bytes
 namespace:  11 bytes
-token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4taDVwdngiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMjQ1NzY2OTEtMTg2ZC0xMWU5LTlmN2QtMDA1MDU2YmI1OTllIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.QuxTQo7-Aa6TArBaWfbPJpTJ1RWJemHxcyqU6HJd5Twmrmfsg4BXwb31mymaGrfHgRR6mpfaGcQqFW1tLELu2dXLy-Q6d9hNouURo19jG1ZdGqYTGde-OwVgRgZqF3EqAOzM90A9nGcSCwTihlzzeYgseuLGwknYtUp5-70eVqy9dYvlEFCEBvoKJ02JRep7qIZHP3KAL-mqm2c2wYj6mbFyyR6dOSTVm9fcfexzl4r_8OZu8mChmdQId0ZROaCE2Kk8P0gP_vbMUT6SnQvgMXIuntrhf0NyyR9IY9PeQ5ahXl8FyaAYmnnvRq0gNg1zhr-tdvOXgeoTSXPfTV4V_Q
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IkFza3RpMUJCRTQ0ZTNqY3pWQmpOZHowZEtlOUdrOUJOcV9IdXdWaHc5NG8ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tdDh2Y2wiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZDQyNDQzNDMtOTQxZi00MzEyLTlkZTMtM2IxNDUzMjJlYjE2Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.bBu2DEMD7wbW8diQSzKff_eMDUYCM8RMGaVftfyIZ0s23U7AakJDOlKyrR1-4oDCI4pqrNwo-d_B_p_tUbr8XOqB2POMG-haWDx1vM9smptkHE-NL9YFi6_kubqXaDLwHYu72k-a3XfVFCKmtvyFcq13EO9mbLncE0-Agxl5or1Cvza0Ryp3qHHIRl8Q2SB8G6prnvw2KFcC5US0Eu7C2m5uO8WWfJtKdabA8-5v5HkmbqDUSuJCB9AUVy6rqwHqjv3q_ZOIWeVzVlytwkZ0lym7HIAHWjnY_z5AsmM5SqlvBY2u69E9W5LojR4pLqxvMBfPH_XCempdSnGGZOpClw
+[kube@k8s-1-16-master install guide]$
 ```
