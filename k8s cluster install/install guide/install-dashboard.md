@@ -3,33 +3,12 @@ When setting up dashboard you will need three components and a service account a
 
 Get these files from https://github.com/justmeandopensource/kubernetes/tree/master/dashboard
 
-- dashboard.yaml
-- heapster.yaml "matrix collection application"
-- influxdb.yaml "Storage engine"
+- kubernetes-dashboard.yaml
 - sa_cluster_admin.yaml
 
-##### Create influxdb components 
-Create influxdb and validate
 ```
-su kube
-kubectl create -f influxdb.yaml
-
-kubectl -n kube-system get pods -o wide
-NAME                                                       READY   STATUS    RESTARTS   AGE     IP               NODE                               NOMINATED NODE   READINESS GATES
-monitoring-influxdb-7db9fd7459-ntxkb                       1/1     Running   0          32s     10.244.1.4       k8s-1-13-node.example.com     <none>           <none>
-```
-##### Create heapster components 
-Create heapster and validate
-```
-kubectl create -f heapster.yaml
-
-kubectl -n kube-system get pods -o wide
-NAME                                                       READY   STATUS    RESTARTS   AGE     IP               NODE                               NOMINATED NODE   READINESS GATES
-heapster-855fc65cd7-66jnj                                  1/1     Running   0          8s      10.244.1.5       k8s-1-13-node.example.com     <none>           <none>
-monitoring-influxdb-7db9fd7459-ntxkb                       1/1     Running   0          92s     10.244.1.4       k8s-1-13-node.example.com     <none>           <none>
-```
-##### Create dashboard components 
-Create dashboard and validate. In my example added nodeport
+##### Modify kubernetes-dashboard yaml 
+Create kubernetes-dashboard. Change type to NodePort and add listener port
 
 ```
 # ------------------- Dashboard Service ------------------- #
@@ -42,33 +21,28 @@ metadata:
   name: kubernetes-dashboard
   namespace: kube-system
 spec:
-  type: NodePort -- changed from cluster port
+  type: NodePort -- **changed from cluster port**
   ports:
     - port: 443
       targetPort: 8443
-      nodePort: 32323  -- Added listener port
+      nodePort: 32323  -- **added listener port**
   selector:
     k8s-app: kubernetes-dashboard   
 ```
 
 ```
-kubectl create -f dashboard.yaml 
-kubectl -n kube-system get pods -o wide
-NAME                                                       READY   STATUS    RESTARTS   AGE     IP               NODE                               NOMINATED NODE   READINESS GATES
-heapster-855fc65cd7-66jnj                                  1/1     Running   0          2m19s   10.244.1.5       k8s-1-13-node.example.com     <none>           <none>
-kubernetes-dashboard-79ff88449c-2cfjr                      1/1     Running   0          8s      10.244.1.6       k8s-1-13-node.example.com     <none>           <none>
-monitoring-influxdb-7db9fd7459-ntxkb                       1/1     Running   0          3m43s   10.244.1.4       k8s-1-13-node.example.com     <none>           <none>
+kubectl create -f kubernetes-dashboard.yaml 
 ```
 ##### Check cluster information 
-Validate the cluster information to make sure the services are running. 
+[kube@k8s-1-16-master install guide]$ kubectl get services --all-namespaces
+NAMESPACE              NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
+default                kubernetes                  ClusterIP   10.96.0.1        <none>        443/TCP                  19h
+kube-system            kube-dns                    ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP   19h
+kubernetes-dashboard   dashboard-metrics-scraper   ClusterIP   10.104.232.16    <none>        8000/TCP                 4m34s
+kubernetes-dashboard   kubernetes-dashboard        NodePort    10.105.221.248   <none>        443:32323/TCP            4m34s
 
-```
-kubectl cluster-info
-Kubernetes master is running at https://192.168.200.81:6443
-Heapster is running at https://192.168.200.81:6443/api/v1/namespaces/kube-system/services/heapster/proxy
-KubeDNS is running at https://192.168.200.81:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-monitoring-influxdb is running at https://192.168.200.81:6443/api/v1/namespaces/kube-system/services/monitoring-influxdb/proxy
-```
+Connect to the dashboard https://192.168.200.86:32323
+
 ##### Create service-account
 To access the dashboard you need to create a service account
 ```
