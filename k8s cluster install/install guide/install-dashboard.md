@@ -1,7 +1,5 @@
 # Install kubernetes 2.0 dashboard
-When setting up dashboard you will need three components and a service account as displayed by the four files below
-
-Get these files from https://github.com/justmeandopensource/kubernetes/tree/master/dashboard
+When setting up dashboard you will need multiple components and a service account
 
 - kubernetes-dashboard.yaml
 - sa_cluster_admin.yaml
