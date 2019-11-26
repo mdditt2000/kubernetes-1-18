@@ -28,7 +28,7 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 
 ## Deploy flannel for Kubernetes
 
-Add the BIGIP device to the flannel overlay network. Find the flannel Annotations
+Add the BIGIP device to the flannel overlay network. Use kubectl describe nodes to find the flannel Annotations
 
 ```
 flannel.alpha.coreos.com/backend-data: {"VtepMAC":"0a:de:a8:5e:00:3f"}
@@ -58,7 +58,7 @@ spec:
 ```
 ## Create a BIG-IP VXLAN tunnel
 
-## create net tunnels vxlan new partition on your BIGIP system
+# create net tunnels vxlan new partition on your BIGIP system
 ```
 tmsh create auth partition k8s
 tmsh create net tunnels vxlan fl-vxlan port 8472 flooding-type none
