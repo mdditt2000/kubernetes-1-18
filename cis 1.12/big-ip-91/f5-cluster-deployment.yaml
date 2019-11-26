@@ -38,7 +38,7 @@ spec:
                   key: password
           command: ["/app/bin/k8s-bigip-ctlr"]
           args: [
-               # See the k8s-bigip-ctlr documentation for information about
+            # See the k8s-bigip-ctlr documentation for information about
             # all config options
             # https://clouddocs.f5.com/products/connectors/k8s-bigip-ctlr/latest
             "--bigip-username=$(BIGIP_USERNAME)",
