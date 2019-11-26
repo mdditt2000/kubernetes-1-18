@@ -58,24 +58,16 @@ spec:
 ```
 ## Create a BIG-IP VXLAN tunnel
 
-## create net tunnels vxlan
+## create net tunnels vxlan new partition on your BIGIP system
 ```
-(tmos)# create net tunnels vxlan fl-vxlan port 8472 flooding-type none
-(tmos)# create net tunnels tunnel fl-vxlan key 1 profile fl-vxlan local-address 192.168.200.91
+tmsh create auth partition k8s
+tmsh create net tunnels vxlan fl-vxlan port 8472 flooding-type none
+tmsh create net tunnels tunnel fl-vxlan key 1 profile fl-vxlan local-address 192.168.200.91
+tmsh create net self 10.244.20.91 address 10.244.20.91/255.255.0.0 allow-service none vlan fl-vxlan
 ```
-## Add the BIG-IP device to the OpenShift overlay network
-```
-(tmos)# create net self 10.128.2.91/14 allow-service all vlan openshift_vxlan
-```
-Subnet comes from the creating the hostsubnets. Used .91 to be consistent with BigIP internal interface
+## Create CIS Controller, BIGIP credentials and RBAC Authentication
 
-## Create a new partition on your BIG-IP system
-```
-(tmos)# create auth partition k8s
-```
-This needs to match the partition in the controller configuration
-
-## Create CIS Controller, BIG-IP credentials and RBAC Authentication
+Configuration options available in the CIS controller
 
 ```
 args: [    
@@ -92,8 +84,9 @@ args: [
         "--flannel-name=fl-vxlan",
         # Logging level
         "--log-level=DEBUG",
+        "--log-response-body",
         AS3 override functionality
-        #"--override-as3-declaration=default/as3_configmap_name>",
+        "--override-as3-declaration=default/f5-as3-configmap>",
         # Self-signed cert
         "--insecure=true",
         "--agent=as3",
@@ -118,12 +111,6 @@ oc delete secret bigip-login -n kube-system
 oc create -f f5-demo-app-route-deployment.yaml -n f5demo
 oc create -f f5-demo-app-route-service.yaml -n f5demo
 oc create -f f5-demo-app-route-basic.yaml -n f5demo
-oc create -f f5-demo-app-route-balance.yaml -n f5demo
-oc create -f f5-demo-app-route-edge-ssl.yaml -n f5demo
-oc create -f f5-demo-app-route-reencrypt-ssl.yaml -n f5demo
-oc create -f f5-demo-app-route-passthrough-ssl.yaml -n f5demo
-oc create -f f5-demo-app-route-waf.yaml -n f5demo
-oc create -f f5-demo-app-route-ab.yaml -n f5demo
 ```
 Please look for example files in my repo
 
@@ -132,12 +119,6 @@ Please look for example files in my repo
 oc delete -f f5-demo-app-route-deployment.yaml -n f5demo
 oc delete -f f5-demo-app-route-service.yaml -n f5demo
 oc delete -f f5-demo-app-route-basic.yaml -n f5demo
-oc delete -f f5-demo-app-route-balance.yaml -n f5demo
-oc delete -f f5-demo-app-route-edge-ssl.yaml -n f5demo
-oc delete -f f5-demo-app-route-reencrypt-ssl.yaml -n f5demo
-oc delete -f f5-demo-app-route-passthrough-ssl.yaml -n f5demo
-oc delete -f f5-demo-app-route-waf.yaml -n f5demo
-oc delete -f f5-demo-app-route-ab.yaml -n f5demo
 ``` 
 ## Enable logging for AS3
 ```
