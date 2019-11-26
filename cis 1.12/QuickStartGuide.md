@@ -56,9 +56,7 @@ spec:
   #Replace Subnet with your BIGIP Flannel Subnet
   podCIDR: "10.244.20.0/24
 ```
-## Create a BIG-IP VXLAN tunnel
-
-# create net tunnels vxlan new partition on your BIGIP system
+## Create net tunnels vxlan new partition on your BIGIP system
 ```
 tmsh create auth partition k8s
 tmsh create net tunnels vxlan fl-vxlan port 8472 flooding-type none
@@ -68,7 +66,6 @@ tmsh create net self 10.244.20.91 address 10.244.20.91/255.255.0.0 allow-service
 ## Create CIS Controller, BIGIP credentials and RBAC Authentication
 
 Configuration options available in the CIS controller
-
 ```
 args: [    
         # See the k8s-bigip-ctlr documentation for information about
