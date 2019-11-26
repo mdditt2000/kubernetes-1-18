@@ -44,7 +44,7 @@ spec:
             "--bigip-username=$(BIGIP_USERNAME)",
             "--bigip-password=$(BIGIP_PASSWORD)",
             "--bigip-url=192.168.200.91",
-            "--bigip-partition=AS3",
+            "--bigip-partition=k8s",
             "--namespace=default",
             "--pool-member-type=cluster",
             "--flannel-name=fl-vxlan",
