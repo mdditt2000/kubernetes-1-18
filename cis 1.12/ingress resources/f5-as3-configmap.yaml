@@ -14,13 +14,7 @@ data:
                             {
                                 "bigip": "/Common/Log all requests"
                             }
-                        ],
-                        "policyWAF": {
-                            "use": "OWASPAutoTune"
-                        }
-                    },
-                    "OWASPAutoTune": {
-                        "bigip": "/Common/WAF_Policy"
+                        ]
                     }
                 }
             }
