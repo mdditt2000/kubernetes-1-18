@@ -10,10 +10,16 @@
                     ],
                     "policyWAF": {
                         "use": "OWASPAutoTune"
+                    },
+                    "profileDOS": {
+                        "use": "Dos"
                     }
                 },
                 "OWASPAutoTune": {
                     "bigip": "/Common/WAF_Policy"
+                },
+                "Dos": {
+                    "bigip": "/Common/Dos"
                 }
             }
         }
