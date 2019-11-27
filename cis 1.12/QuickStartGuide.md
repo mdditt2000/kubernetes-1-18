@@ -28,13 +28,17 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 
 ## Deploy flannel for Kubernetes
 
-Add the BIGIP device to the flannel overlay network. Use kubectl describe nodes to find the flannel Annotations
+Add the BIGIP device to the flannel overlay network. Find the VTEP MAC address
 
 ```
-flannel.alpha.coreos.com/backend-data: {"VtepMAC":"0a:de:a8:5e:00:3f"}
-flannel.alpha.coreos.com/backend-type: vxlan
-flannel.alpha.coreos.com/kube-subnet-manager: true
-flannel.alpha.coreos.com/public-ip: 192.168.200.86
+root@(big-ip-ve1-pme)(cfg-sync Standalone)(Active)(/Common)(tmos)# show net tunnels tunnel fl-vxlan all-properties
+
+-------------------------------------------------
+Net::Tunnel: fl-vxlan
+-------------------------------------------------
+MAC Address                     00:50:56:bb:96:05
+Interface Name                           fl-vxlan
+
 ```
 ## Create a “dummy” Kubernetes Node for the BIGIP device
 
@@ -47,7 +51,7 @@ metadata:
   name: bigip1
   annotations:
     #Replace MAC with your BIGIP Flannel VXLAN Tunnel MAC
-    flannel.alpha.coreos.com/backend-data: '{"VtepMAC":"0a:de:a8:5e:00:3f"}'
+    flannel.alpha.coreos.com/backend-data: '{"VtepMAC":"00:50:56:bb:96:05"}'
     flannel.alpha.coreos.com/backend-type: "vxlan"
     flannel.alpha.coreos.com/kube-subnet-manager: "true"
     #Replace IP with Self-IP for your deployment
@@ -110,7 +114,7 @@ kubectl delete secret bigip-login -n kube-system
 ```
 oc create -f f5-demo-app-route-deployment.yaml -n f5demo
 oc create -f f5-demo-app-route-service.yaml -n f5demo
-oc create -f f5-demo-app-route-basic.yaml -n f5demo
+kubectl create -f f5-bigip-node.yaml
 ```
 Please look for example files in my repo
 
@@ -118,7 +122,7 @@ Please look for example files in my repo
 ```
 oc delete -f f5-demo-app-route-deployment.yaml -n f5demo
 oc delete -f f5-demo-app-route-service.yaml -n f5demo
-oc delete -f f5-demo-app-route-basic.yaml -n f5demo
+kubectl delete -f f5-bigip-node.yaml
 ``` 
 ## Enable logging for AS3
 ```
