@@ -3,35 +3,32 @@ apiVersion: v1
 metadata:
   name: f5-as3-declaration
   namespace: default
-  labels:
-    f5type: virtual-server
-    as3: "true"
 data:
   template: |
     {
-        "class": "AS3",
         "declaration": {
-            "class": "ADC",
-            "schemaVersion": "3.13.0",
-            "id": "urn:uuid:33045210-3ab8-4636-9b2a-c98d22ab915d",
-            "label": "http",
-            "remark": "A1 Template",
-            "TEST_Service_TCP_125": {
-        "class": "Tenant",
-        "Application": {
-            "class": "Application",
-            "template": "generic",
-            "testItem": {
-                "class": "Service_TCP",
-                "virtualPort": 123,
-                "virtualAddresses": [
-                    "192.0.2.100"
-                ],
-                "profileDOS": {
-                    "bigip": "/Common/dos"
+            "k8s_AS3": {
+                "Shared": {
+                    "ingress_10_192_75_108_80": {
+                        "securityLogProfiles": [
+                            {
+                                "bigip": "/Common/Log all requests"
+                            }
+                        ],
+                        "policyWAF": {
+                            "use": "OWASPAutoTune"
+                        },
+                        "profileDOS": {
+                            "use": "Dos"
+                        }
+                    },
+                    "OWASPAutoTune": {
+                        "bigip": "/Common/WAF_Policy"
+                    },
+                    "Dos": {
+                        "bigip": "/Common/Dos"
+                    }
                 }
             }
         }
-        }
-    }
     }
