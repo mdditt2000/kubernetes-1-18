@@ -7,7 +7,10 @@
                         {
                             "bigip": "/Common/Log all requests"
                         }
-                    ]
+                    ],
+                    "policyWAF": {
+                        "bigip": "/Common/WAF_Policy"
+                    }
                 }
             }
         }
