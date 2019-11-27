@@ -95,7 +95,7 @@ args: [
 ```
 **Note:** CIS controller is configured with the override-as3-declaration option. This allow the user BIGIP administrator to add global policy, profiles etc to the virtual without having to add additional the need for an annotation. Example below show added WAF and logging. Create this configmap for the configuration to be applied. The configmap, namespace, tenant, AS3 app all need to match. All the objects need to be defined under the virtual
 
-``
+```
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -121,7 +121,7 @@ data:
             }
         }
     }
-``
+```
 
 ## BIGIP credentials and RBAC Authentication
 
