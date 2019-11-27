@@ -85,7 +85,7 @@ args: [
         "--flannel-name=fl-vxlan",
         # Logging level
         "--log-level=DEBUG",
-        "--log-response-body",
+        "--log-as3-response=true",
         AS3 override functionality
         "--override-as3-declaration=default/f5-as3-configmap",
         # Self-signed cert
