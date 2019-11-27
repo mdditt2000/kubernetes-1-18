@@ -87,12 +87,44 @@ args: [
         "--log-level=DEBUG",
         "--log-response-body",
         AS3 override functionality
-        "--override-as3-declaration=default/f5-as3-configmap>",
+        "--override-as3-declaration=default/f5-as3-configmap",
         # Self-signed cert
         "--insecure=true",
         "--agent=as3",
        ]
 ```
+**Note:** CIS controller is configured with the override-as3-declaration option. This allow the user BIGIP administrator to add global policy, profiles etc to the virtual without having to add additional the need for an annotation. Example below show added WAF and logging. Create this configmap for the configuration to be applied. The configmap, namespace, tenant, AS3 app all need to match. All the objects need to be defined under the virtual
+
+``
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: f5-as3-declaration
+  namespace: default
+data:
+  template: |
+    {
+        "declaration": {
+            "k8s_AS3": {
+                "Shared": {
+                    "ingress_10_192_75_108_80": {
+                        "securityLogProfiles": [
+                            {
+                                "bigip": "/Common/Log all requests"
+                            }
+                        ],
+                        "policyWAF": {
+                            "bigip": "/Common/WAF_Policy"
+                        }
+                    }
+                }
+            }
+        }
+    }
+``
+
+## BIGIP credentials and RBAC Authentication
+
 ```
 #create kubernetes bigip container connecter, authentication and RBAC
 kubectl create secret generic bigip-login -n kube-system --from-literal=username=admin --from-literal=password=f5PME123
@@ -110,19 +142,16 @@ kubectl delete clusterrolebinding k8s-bigip-ctlr-clusteradmin
 kubectl delete serviceaccount k8s-bigip-ctlr -n kube-system
 kubectl delete secret bigip-login -n kube-system
 ```
-## Create container f5-demo-app-route
+## Create ingress and configmap
 ```
-oc create -f f5-demo-app-route-deployment.yaml -n f5demo
-oc create -f f5-demo-app-route-service.yaml -n f5demo
-kubectl create -f f5-bigip-node.yaml
+kubectl create -f f5-as3-configmap.yaml
+kubectl create -f f5-k8s-ingress.yaml
 ```
 Please look for example files in my repo
 
-## Delete container f5-demo-app-route
+## Delete ingress
 ```
-oc delete -f f5-demo-app-route-deployment.yaml -n f5demo
-oc delete -f f5-demo-app-route-service.yaml -n f5demo
-kubectl delete -f f5-bigip-node.yaml
+kubectl delete -f f5-k8s-ingress.yaml
 ``` 
 ## Enable logging for AS3
 ```
