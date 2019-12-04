@@ -36,7 +36,7 @@ root@(big-ip-ve1-pme)(cfg-sync Standalone)(Active)(/Common)(tmos)# show net tunn
 -------------------------------------------------
 Net::Tunnel: fl-vxlan
 -------------------------------------------------
-MAC Address                     00:50:56:bb:96:05
+MAC Address                     00:50:56:bb:e5:56
 Interface Name                           fl-vxlan
 
 ```
@@ -51,7 +51,7 @@ metadata:
   name: bigip1
   annotations:
     #Replace MAC with your BIGIP Flannel VXLAN Tunnel MAC
-    flannel.alpha.coreos.com/backend-data: '{"VtepMAC":"00:50:56:bb:96:05"}'
+    flannel.alpha.coreos.com/backend-data: '{"VtepMAC":"00:50:56:bb:e5:56"}'
     flannel.alpha.coreos.com/backend-type: "vxlan"
     flannel.alpha.coreos.com/kube-subnet-manager: "true"
     #Replace IP with Self-IP for your deployment
