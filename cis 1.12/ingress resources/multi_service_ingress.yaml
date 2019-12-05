@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/ip: 172.16.2.8
+  name: multi-service
+spec:
+  rules:
+  - host: foo.com
+    http:
+      paths:
+      - backend:
+          serviceName: svc1
+          servicePort: 8080
+        path: /foo
+      - backend:
+          serviceName: svc2
+          servicePort: 8081
+        path: /bar
+  - host: bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: svc3
+          servicePort: 8082
+        path: /foobar

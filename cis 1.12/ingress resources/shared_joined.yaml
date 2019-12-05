@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/http-port: "80"
+    virtual-server.f5.com/ip: 1.0.0.1
+  name: k8s18a
+spec:
+  backend:
+    serviceName: svc1
+    servicePort: 8080
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/http-port: "80"
+    virtual-server.f5.com/ip: 1.0.0.1
+  name: k8s18b
+spec:
+  backend:
+    serviceName: svc2
+    servicePort: 8081
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/http-port: "80"
+    virtual-server.f5.com/ip: 1.0.0.1
+  name: k8s18c
+spec:
+  backend:
+    serviceName: svc3
+    servicePort: 8082
+
+
