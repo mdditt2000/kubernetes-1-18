@@ -6,5 +6,5 @@ metadata:
   name: default_ip
 spec:
   backend:
-    serviceName: svc1
+    serviceName: f5-hello-world
     servicePort: 8080
