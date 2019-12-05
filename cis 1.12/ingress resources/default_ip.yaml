@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/ip: controller-default
+  name: default_ip
+spec:
+  backend:
+    serviceName: svc1
+    servicePort: 8080

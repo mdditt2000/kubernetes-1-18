@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/ip: 172.16.3.11
+  name: k8s12
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: svc-1
+          servicePort: 80
+        path: /foo
+      - backend:
+          serviceName: svc-2
+          servicePort: 80
+        path: /bar
+      - backend:
+          serviceName: svc-1
+          servicePort: 80
+        path: /foobar

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/ip: 172.16.3.8
+    virtual-server.f5.com/rewrite-app-root: foo.com=/bar
+    virtual-server.f5.com/rewrite-target-url: bar.com=foo.com
+  name: k8s25
+spec:
+  rules:
+  - host: foo.com
+    http:
+      paths:
+      - backend:
+          serviceName: svc-1
+          servicePort: 80
+  - host: bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: svc-2
+          servicePort: 80
+        path: /bar

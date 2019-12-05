@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "false"
+    virtual-server.f5.com/ip: 172.16.3.8
+  name: k8s26
+spec:
+  rules:
+  - host: foo.testenv.local
+    http:
+      paths:
+      - backend:
+          serviceName: svc
+          servicePort: 80
+        path: /
+  tls:
+  - secretName: test-secret
