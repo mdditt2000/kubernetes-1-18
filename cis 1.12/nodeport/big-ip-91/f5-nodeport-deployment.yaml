@@ -48,7 +48,6 @@ spec:
             "--bigip-partition=k8s",
             "--namespace=default",
             "--pool-member-type=nodeport",
-            "--flannel-name=fl-vxlan",
             # Logging level
             "--log-level=DEBUG",
             "--log-as3-response=true",
