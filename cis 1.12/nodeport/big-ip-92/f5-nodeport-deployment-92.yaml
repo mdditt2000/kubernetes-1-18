@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-bigip-ctlr-deployment
+  name: k8s-bigip-ctlr-deployment-92
   namespace: kube-system
 spec:
   selector:
@@ -44,7 +44,7 @@ spec:
             "--bigip-username=$(BIGIP_USERNAME)",
             "--bigip-password=$(BIGIP_PASSWORD)",
             # Replace with the IP address or hostname of your BIG-IP device
-            "--bigip-url=192.168.200.91",
+            "--bigip-url=192.168.200.92",
             "--bigip-partition=k8s",
             "--namespace=default",
             "--pool-member-type=nodeport",
