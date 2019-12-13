@@ -1,8 +1,8 @@
 # Kubernetes 1.16 and Container Ingress Controller Deployment Guide for HA
 
-This page is created to document K8S 1.16 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
+This page is created to document K8S 1.16 with integration of CIS and BIGIP
 
-**Note** We have observed quite a few issues when performed some actual testing of BIGIP HA with K8s using Flannel. Data Traffic through associated external floating IP doesn't work due to replication of FDB configurations from ACTIVE to STANDBY not happening properly. Therefore the only recommend approach for BIGIP HA with K8S is using Calico or Nodeport. This document provides configuration examples and guidance for Nodeport based on my testing. 
+**Note** We have observed quite a few issues when performed some actual testing of BIGIP HA with K8s using Flannel. Data Traffic through associated external floating IP doesn't work due to replication of FDB configurations from ACTIVE to STANDBY not happening properly. Therefore the only recommend approach for BIGIP HA with K8S is using Calico or Nodeport. This document provides configuration examples and guidance for NodePort based on my testing. 
 
 Here is a document to configuring the BIGIP system to connect the Calico Kubernetes cluster https://support.f5.com/csp/article/K14436300
 
@@ -28,7 +28,7 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIGIP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-**Note** Since using NodePort there is no need for VXLAN tunnels, additional routing. BIGIP can dynamically ARP for the Kube-proxy running on node. However CIS controller are required. AS3 has a sync on change flag, so when you send a declaration, if something changed, it will sync. There for my testing i used active sync which worked nicely
+**Note** Since using NodePort there is no need for VXLAN tunnels, additional routing. BIGIP can dynamically ARP for the Kube-proxy running on node. However CIS controller are required. AS3 has a sync on change flag, so when you send a declaration, if something changed, it will sync. There for my testing i used active sync which worked nicely. Also no additional floating self-ip are required. Since the BIGIP is the default gateway I created a self-ip on the internal network and assigned the traffic group 
 
 ## Create CIS Controller, BIGIP credentials and RBAC Authentication
 
