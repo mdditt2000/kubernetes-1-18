@@ -2,7 +2,7 @@
 
 This page is created to document K8S 1.16 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
 
-**Note** We have observed quite a few issues when performed some actual testing of BIGIP HA with K8s using Flannel. Data Traffic through associated external floating IP seems doesn't work due to replication of FDB configurations from ACTIVE to STANDBY not happening properly. Therefore the only recommend approach for BIGIP HA with K8S is using Calico or Nodeport. This document provides configuration examples and guidance for Nodeport based on my testing. 
+**Note** We have observed quite a few issues when performed some actual testing of BIGIP HA with K8s using Flannel. Data Traffic through associated external floating IP doesn't work due to replication of FDB configurations from ACTIVE to STANDBY not happening properly. Therefore the only recommend approach for BIGIP HA with K8S is using Calico or Nodeport. This document provides configuration examples and guidance for Nodeport based on my testing. 
 
 Here is a document to configuring the BIGIP system to connect the Calico Kubernetes cluster https://support.f5.com/csp/article/K14436300
 
