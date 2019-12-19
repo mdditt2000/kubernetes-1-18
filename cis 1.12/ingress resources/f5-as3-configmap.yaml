@@ -17,12 +17,7 @@ data:
                         ],
                         "policyWAF": {
                             "bigip": "/Common/WAF_Policy"
-                        },
-                        "iRules": [
-                            {
-                                "bigip": "/Commom/http_redirect_irule"
-                            }
-                        ]
+                        }
                     }
                 }
             }
