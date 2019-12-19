@@ -13,7 +13,7 @@
                     },
                     "iRules": [
                         {
-                            "bigip": "/appaotel1_AS3/Shared/http_redirect_irule"
+                            "bigip": "/Common/_sys_https_redirect"
                         }
                     ]
                 }

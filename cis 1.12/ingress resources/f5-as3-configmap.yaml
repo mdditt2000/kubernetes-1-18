@@ -20,19 +20,9 @@ data:
                         },
                         "iRules": [
                             {
-                                "bigip": "/Common/_sys_https_redirect"
+                                "bigip": "/Commom/http_redirect_irule"
                             }
                         ]
-                    },
-                    "ingress_10_192_75_108_443": {
-                        "securityLogProfiles": [
-                            {
-                                "bigip": "/Common/Log all requests"
-                            }
-                        ],
-                        "policyWAF": {
-                            "bigip": "/Common/WAF_Policy"
-                        }
                     }
                 }
             }
