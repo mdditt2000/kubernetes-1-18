@@ -9,7 +9,7 @@ data:
         "declaration": {
             "k8s_AS3": {
                 "Shared": {
-                    "ingress_10_192_75_108_80": {
+                    "ingress_10_192_75_108_443": {
                         "securityLogProfiles": [
                             {
                                 "bigip": "/Common/Log all requests"
