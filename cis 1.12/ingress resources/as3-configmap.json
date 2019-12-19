@@ -10,12 +10,7 @@
                     ],
                     "policyWAF": {
                         "bigip": "/Common/WAF_Policy"
-                    },
-                    "iRules": [
-                        {
-                            "bigip": "/Common/_sys_https_redirect"
-                        }
-                    ]
+                    }
                 }
             }
         }
