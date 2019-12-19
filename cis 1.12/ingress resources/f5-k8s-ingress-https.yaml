@@ -5,8 +5,10 @@ metadata:
     # Specify a supported BIG-IP load balancing mode
     # Balance to round-robin
     # health monitoring
-    ingress.kubernetes.io/allow-http: "true"
-    ingress.kubernetes.io/ssl-redirect: "false"
+    virtual-server.f5.com/http-port: "443"
+    virtual-server.f5.com/balance: "round-robin"
+    ingress.kubernetes.io/allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
     virtual-server.f5.com/health: |
         [
           {
