@@ -17,7 +17,12 @@ data:
                         ],
                         "policyWAF": {
                             "bigip": "/Common/WAF_Policy"
-                        }
+                        },
+                        "iRules": [
+                            {
+                                "bigip": "/appaotel1_AS3/Shared/_sys_https_redirect"
+                            }
+                        ]
                     }
                 }
             }
