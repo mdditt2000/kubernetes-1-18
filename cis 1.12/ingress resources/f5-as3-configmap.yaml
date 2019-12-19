@@ -20,7 +20,7 @@ data:
                         },
                         "iRules": [
                             {
-                                "bigip": "/appaotel1_AS3/Shared/_sys_https_redirect"
+                                "bigip": "/Common/_sys_https_redirect"
                             }
                         ]
                     }
