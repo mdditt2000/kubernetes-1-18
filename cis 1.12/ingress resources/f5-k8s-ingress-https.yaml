@@ -19,6 +19,7 @@ metadata:
     virtual-server.f5.com/ip: 10.192.75.108
   name: f5-hello-world
 spec:
+  tls:
     secretName: /Common/clientssl
   backend:
     serviceName: f5-hello-world
