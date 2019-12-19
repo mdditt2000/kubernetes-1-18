@@ -8,7 +8,7 @@ metadata:
     virtual-server.f5.com/http-port: "443"
     virtual-server.f5.com/balance: "round-robin"
     ingress.kubernetes.io/allow-http: "false"
-    ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
     virtual-server.f5.com/health: |
         [
           {
