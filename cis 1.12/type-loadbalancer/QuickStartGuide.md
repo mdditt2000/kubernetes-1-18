@@ -1,4 +1,4 @@
-# Kubernetes 1.16 and Container Ingress Controller Quick Start Guide for using type-load balance
+# Kubernetes 1.16 and Container Ingress Controller Quick Start Guide for using type-loadbalance
 
 This page is created to document K8S 1.16 with integration of CIS and BIGIP using kubernetes type-loadbalance 
 
