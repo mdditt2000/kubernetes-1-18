@@ -47,7 +47,7 @@ spec:
             "--bigip-url=192.168.200.92",
             "--bigip-partition=k8s",
             "--namespace=default",
-            "--pool-member-type=nodeport"",
+            "--pool-member-type="nodeport",
             # Logging level
             "--log-level=DEBUG",
             "--log-as3-response=true",
