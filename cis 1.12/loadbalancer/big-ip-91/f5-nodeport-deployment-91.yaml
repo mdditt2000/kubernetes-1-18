@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-bigip-ctlr-deployment-91
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: k8s-bigip-ctlr
+  # DO NOT INCREASE REPLICA COUNT
+  replicas: 1
+  template:
+    metadata:
+      name: k8s-bigip-ctlr
+      labels:
+        app: k8s-bigip-ctlr
+    spec:
+      # Name of the Service Account bound to a Cluster Role with the required
+      # permissions
+      serviceAccountName: k8s-bigip-ctlr
+      containers:
+        - name: k8s-bigip-ctlr
+          image: "f5networks/k8s-bigip-ctlr:1.12.0"
+          env:
+            - name: BIGIP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  # Replace with the name of the Secret containing your login
+                  # credentials
+                  name: bigip-login
+                  key: username
+            - name: BIGIP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  # Replace with the name of the Secret containing your login
+                  # credentials
+                  name: bigip-login
+                  key: password
+          command: ["/app/bin/k8s-bigip-ctlr"]
+          args: [
+            # See the k8s-bigip-ctlr documentation for information about
+            # all config options
+            # https://clouddocs.f5.com/products/connectors/k8s-bigip-ctlr/latest
+            "--bigip-username=$(BIGIP_USERNAME)",
+            "--bigip-password=$(BIGIP_PASSWORD)",
+            # Replace with the IP address or hostname of your BIG-IP device
+            "--bigip-url=192.168.200.91",
+            "--bigip-partition=k8s",
+            "--namespace=default",
+            "--pool-member-type=loadbalancer",
+            # Logging level
+            "--log-level=DEBUG",
+            "--log-as3-response=true",
+            # AS3 override functionality
+            "--override-as3-declaration=default/f5-as3-declaration",
+            # Self-signed cert
+            "--insecure=true",
+            "--agent=as3",
+          ]
