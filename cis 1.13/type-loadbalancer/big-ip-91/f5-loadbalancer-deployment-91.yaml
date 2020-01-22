@@ -20,7 +20,7 @@ spec:
       serviceAccountName: k8s-bigip-ctlr
       containers:
         - name: k8s-bigip-ctlr
-          image: "f5networks/k8s-bigip-ctlr:1.12.0"
+          image: "snatra27/k8s-bigip-ctlr:testcis"
           env:
             - name: BIGIP_USERNAME
               valueFrom:
