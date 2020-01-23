@@ -3,6 +3,9 @@
         "k8s_AS3": {
             "Shared": {
                 "ingress_10_192_75_108_80": {
+                    "profileHTTP": {
+                        "bigip": "/Common/http-custom"
+                    },
                     "securityLogProfiles": [
                         {
                             "bigip": "/Common/Log all requests"
