@@ -53,7 +53,7 @@ spec:
             "--log-level=DEBUG",
             "--log-as3-response=true",
             # AS3 override functionality
-            #"--override-as3-declaration=default/f5-as3-declaration",
+            "--override-as3-declaration=default/f5-as3-declaration",
             # Self-signed cert
             "--insecure=true",
             "--agent=as3",
