@@ -20,7 +20,7 @@ spec:
       serviceAccountName: k8s-bigip-ctlr
       containers:
         - name: k8s-bigip-ctlr
-          image: "f5networks/k8s-bigip-ctlr:1.13.0"
+          image: "fsnatra27/k8s-bigip-ctlr:v1.13.1_override_informer"
           env:
             - name: BIGIP_USERNAME
               valueFrom:
@@ -37,6 +37,17 @@ spec:
                   name: bigip-login
                   key: password
           command: ["/app/bin/k8s-bigip-ctlr"]
+          #Liveness Probe Configuration to be added under command
+            livenessProbe:
+              failureThreshold: 3
+              httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+              initialDelaySeconds: 15
+              periodSeconds: 15
+              successThreshold: 1
+              timeoutSeconds: 15
           args: [
             # See the k8s-bigip-ctlr documentation for information about
             # all config options
@@ -57,4 +68,4 @@ spec:
             # Self-signed cert
             "--insecure=true",
             "--agent=as3",
-          ]
+            ]
