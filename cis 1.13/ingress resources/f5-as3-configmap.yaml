@@ -9,18 +9,12 @@ data:
         "declaration": {
             "k8s_AS3": {
                 "Shared": {
-                    "ingress_10_192_75_108_80": {
-                        "profileHTTP": {
-                            "bigip": "/Common/http-custom"
-                        },
-                        "securityLogProfiles": [
+                    "ingress_10_192_75_108_443": {
+                        "serverTLS": [
                             {
-                                "bigip": "/Common/Log all requests"
+                                "bigip": "/Common/f5demo"
                             }
-                        ],
-                        "policyWAF": {
-                            "bigip": "/Common/WAF_Policy"
-                        }
+                        ]
                     }
                 }
             }
