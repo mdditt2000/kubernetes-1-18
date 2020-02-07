@@ -1,0 +1,79 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8s-bigip-ctlr-deployment
+  namespace: kube-system
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: k8s-bigip-ctlr
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1~
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        seccomp.security.alpha.kubernetes.io/defaultProfileName: unconfined
+        seccomp.security.alpha.kubernetes.io/pod: unconfined
+      creationTimestamp: null
+      labels:
+        app: k8s-bigip-ctlr
+      name: k8s-bigip-ctlr
+    spec:
+      containers:
+      - args:
+        - --bigip-username=BIGIP_USERNAME
+        - --bigip-password=BIGIP_PASSWORD
+        - --bigip-url=10.145.68.89
+        - --bigip-partition=openshift
+        - --pool-member-type=cluster
+        - --openshift-sdn-name=/Common/openshift_vxlan
+        - --manage-routes=true
+        - --route-vserver-addr=172.16.1.3
+        - --log-level=debug
+        - --namespace=default
+        - --route-label=systest
+        - --insecure=true
+        - --agent=cccl
+        command:
+        - /app/bin/k8s-bigip-ctlr
+        image: f5networks/k8s-bigip-ctlr:1.12.0
+        imagePullPolicy: Always
+        name: k8s-bigip-ctlr
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        #Liveness Probe Configuration to be added under command
+        livenessProbe:
+           failureThreshold: 3
+           httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+           initialDelaySeconds: 15
+           periodSeconds: 15
+           successThreshold: 1
+           timeoutSeconds: 15
+        #Readiness Probe Configuration to be added under command   
+        readinessProbe:
+           failureThreshold: 3
+           httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+           initialDelaySeconds: 30
+           periodSeconds: 30
+           successThreshold: 1
+           timeoutSeconds: 15
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: bigip-ctlr
+      serviceAccountName: bigip-ctlr
+      terminationGracePeriodSeconds: 30

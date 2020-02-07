@@ -4,13 +4,24 @@ metadata:
   name: k8s-bigip-ctlr-deployment
   namespace: kube-system
 spec:
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: k8s-bigip-ctlr
   # DO NOT INCREASE REPLICA COUNT
   replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1~
+    type: RollingUpdate
   template:
     metadata:
+      annotations:
+        seccomp.security.alpha.kubernetes.io/defaultProfileName: unconfined
+        seccomp.security.alpha.kubernetes.io/pod: unconfined
+      creationTimestamp: null
       name: k8s-bigip-ctlr
       labels:
         app: k8s-bigip-ctlr
@@ -20,7 +31,7 @@ spec:
       serviceAccountName: k8s-bigip-ctlr
       containers:
         - name: k8s-bigip-ctlr
-          image: "snatra27/k8s-bigip-ctlr:v1.13.1_override_informer"
+          image: "subbuv26/k8s-bigip-ctlr:pre_1.13.1_build"
           env:
             - name: BIGIP_USERNAME
               valueFrom:
@@ -37,6 +48,28 @@ spec:
                   name: bigip-login
                   key: password
           command: ["/app/bin/k8s-bigip-ctlr"]
+          #Liveness Probe Configuration to be added under command
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 15
+          #Readiness Probe Configuration to be added under command   
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 15
           args: [
             # See the k8s-bigip-ctlr documentation for information about
             # all config options

@@ -24,7 +24,6 @@ spec:
   tls:
     # Provide the name of the Secret you want to use.
     - secretName: /Common/clientssl
-    - secretName: /Common/f5demo
   backend:
     # Provide the name of a single Kubernetes Service you want to expose to external
     # traffic using TLS
