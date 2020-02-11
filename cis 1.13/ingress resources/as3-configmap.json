@@ -3,14 +3,9 @@
         "k8s_AS3": {
             "Shared": {
                 "ingress_10_192_75_108_443": {
-                    "serverTLS": [
-                        {
-                            "bigip": "/Common/f5demo.com"
-                        },
-                        {
-                            "bigip": "/Common/barbaz.com"
-                        }
-                    ]
+                    "serverTLS": {
+                        "bigip": "/Common/f5demo.com"
+                    }
                 }
             }
         }
