@@ -10,11 +10,6 @@
                         {
                             "bigip": "/Common/barbaz.com"
                         }
-                    ],
-                    "securityLogProfiles": [
-                        {
-                            "bigip": "/Common/Log all requests"
-                        }
                     ]
                 }
             }
