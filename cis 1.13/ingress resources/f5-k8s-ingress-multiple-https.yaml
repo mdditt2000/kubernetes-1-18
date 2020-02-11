@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    # Specify a supported BIG-IP load balancing mode
+    # Balance to round-robin
+    # health monitoring
+    virtual-server.f5.com/http-port: "443"
+    virtual-server.f5.com/balance: "round-robin"
+    ingress.kubernetes.io/allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    virtual-server.f5.com/health: |
+        [
+          {
+            "path": "mysite.f5demo.com/",
+            "send": "HTTP GET /",
+            "interval": 5,
+            "timeout": 10
+          }
+        ]
+    virtual-server.f5.com/ip: 10.192.75.108
+  name: f5-hello-world
+  name: k8s11
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - mysite.f5demo.com
+    secretName: /Common/f5demo
+  - hosts:
+    - barbaz.com
+    secretName: /Common/clientssl
+  rules:
+  - host: mysite.f5demo.com
+    http:
+      paths:
+      - backend:
+          serviceName: f5-hello-world
+          servicePort: 8080
+        path: /foo
+      - backend:
+          serviceName: f5-hello-world
+          servicePort: 8080
+        path: /bar
