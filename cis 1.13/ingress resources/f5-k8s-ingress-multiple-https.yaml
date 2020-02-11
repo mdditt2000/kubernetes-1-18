@@ -20,16 +20,15 @@ metadata:
         ]
     virtual-server.f5.com/ip: 10.192.75.108
   name: f5-hello-world
-  name: k8s11
   namespace: default
 spec:
   tls:
   - hosts:
-    - mysite.f5demo.com
-    secretName: /Common/f5demo
+    - f5demo.com
+    secretName: /Common/f5demo.com
   - hosts:
     - barbaz.com
-    secretName: /Common/clientssl
+    secretName: /Common/barbaz.com
   rules:
   - host: mysite.f5demo.com
     http:
@@ -37,8 +36,4 @@ spec:
       - backend:
           serviceName: f5-hello-world
           servicePort: 8080
-        path: /foo
-      - backend:
-          serviceName: f5-hello-world
-          servicePort: 8080
-        path: /bar
+        path: /
