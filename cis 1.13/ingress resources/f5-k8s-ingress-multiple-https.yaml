@@ -14,8 +14,6 @@ metadata:
   namespace: default
 spec:
   tls:
-  - secretName: /Common/f5demo.com
-  - secretName: /Common/barbaz.com
   - hosts:
     - f5demo.com
     secretName: /Common/f5demo.com
