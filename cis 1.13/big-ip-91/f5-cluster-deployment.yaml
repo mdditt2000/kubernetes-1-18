@@ -31,7 +31,7 @@ spec:
       serviceAccountName: k8s-bigip-ctlr
       containers:
         - name: k8s-bigip-ctlr
-          image: "subbuv26/k8s-bigip-ctlr:pre_1.13.1_build"
+          image: "somanchit/k8s-bigip-ctlr:debug_mspfix"
           env:
             - name: BIGIP_USERNAME
               valueFrom:
