@@ -10,7 +10,32 @@
                         {
                             "bigip": "/Common/clientssl"
                         }
+                    ],
+                    "include": [
+                        "/Common/Shared/constants/securityCollection"
                     ]
+                }
+            }
+        }
+    }
+}
+
+{
+    "declaration": {
+        "k8s_AS3": {
+            "Shared": {
+                "ingress_10_192_75_108_80": {
+                    "serverTLS": [
+                        {
+                            "bigip": "/Common/f5demo.com"
+                        },
+                        {
+                            "bigip": "/Common/clientssl"
+                        }
+                    ],
+                    "profileHTTP": {
+                        "bigip": "/Common/http-custom"
+                    }
                 }
             }
         }

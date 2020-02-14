@@ -9,7 +9,7 @@ data:
         "declaration": {
             "k8s_AS3": {
                 "Shared": {
-                    "ingress_10_192_75_108_443": {
+                    "ingress_10_192_75_108_80": {
                         "serverTLS": [
                             {
                                 "bigip": "/Common/f5demo.com"
@@ -17,7 +17,10 @@ data:
                             {
                                 "bigip": "/Common/clientssl"
                             }
-                        ]
+                        ],
+                        "profileHTTP": {
+                            "bigip": "/Common/http-custom"
+                        }
                     }
                 }
             }
