@@ -13,6 +13,7 @@ data:
                         "profileHTTP": {
                             "bigip": "/Common/http-custom"
                         },
+                        "persistenceMethods": [],
                         "securityLogProfiles": [
                             {
                                 "bigip": "/Common/Log all requests"

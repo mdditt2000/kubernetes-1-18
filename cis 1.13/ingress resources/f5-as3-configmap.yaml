@@ -10,16 +10,17 @@ data:
             "k8s_AS3": {
                 "Shared": {
                     "ingress_10_192_75_108_80": {
-                        "serverTLS": [
-                            {
-                                "bigip": "/Common/f5demo.com"
-                            },
-                            {
-                                "bigip": "/Common/clientssl"
-                            }
-                        ],
                         "profileHTTP": {
                             "bigip": "/Common/http-custom"
+                        },
+                        "persistenceMethods": [],
+                        "securityLogProfiles": [
+                            {
+                                "bigip": "/Common/Log all requests"
+                            }
+                        ],
+                        "policyWAF": {
+                            "bigip": "/Common/WAF_Policy"
                         }
                     }
                 }
