@@ -1,93 +1,61 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: 
   name: k8s-bigip-ctlr-deployment
   namespace: kube-system
-spec:
+spec: 
   progressDeadlineSeconds: 600
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: k8s-bigip-ctlr
-  # DO NOT INCREASE REPLICA COUNT
   replicas: 1
-  strategy:
-    rollingUpdate:
+  revisionHistoryLimit: 10
+  selector: 
+    matchLabels: 
+      app: k8s-bigip-ctlr
+  strategy: 
+    rollingUpdate: 
       maxSurge: 1
       maxUnavailable: 1
     type: RollingUpdate
-  template:
-    metadata:
-      annotations:
+  template: 
+    metadata: 
+      annotations: 
         seccomp.security.alpha.kubernetes.io/defaultProfileName: unconfined
         seccomp.security.alpha.kubernetes.io/pod: unconfined
-      creationTimestamp: null
-      name: k8s-bigip-ctlr
-      labels:
+      creationTimestamp: ~
+      labels: 
         app: k8s-bigip-ctlr
-    spec:
-      # Name of the Service Account bound to a Cluster Role with the required
-      # permissions
-      serviceAccountName: k8s-bigip-ctlr
-      containers:
-        - name: k8s-bigip-ctlr
-          image: "somanchit/k8s-bigip-ctlr:as3_3171"
-          env:
-            - name: BIGIP_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  # Replace with the name of the Secret containing your login
-                  # credentials
-                  name: bigip-login
+      name: k8s-bigip-ctlr
+    spec: 
+      containers: 
+        - 
+          args: 
+            - "--bigip-username=$(BIGIP_USERNAME)"
+            - "--bigip-password=$(BIGIP_PASSWORD)"
+            - "--bigip-url=1.2.3.4"
+            - "--bigip-partition=k8s"
+            - "--namespace=default"
+            - "--pool-member-type=cluster"
+            - "--flannel-name=fl-vxlan"
+            - "--log-level=DEBUG"
+            - "--insecure=true"
+            - "--manage-ingress=false"
+            - "--manage-routes=false"
+            - "--agent=as3"
+            - "--as3-validation=true"
+          command: 
+            - /app/bin/k8s-bigip-ctlr
+          env: 
+            - 
+              name: BIGIP_USERNAME
+              valueFrom: 
+                secretKeyRef: 
                   key: username
-            - name: BIGIP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  # Replace with the name of the Secret containing your login
-                  # credentials
                   name: bigip-login
+            - 
+              name: BIGIP_PASSWORD
+              valueFrom: 
+                secretKeyRef: 
                   key: password
-          command: ["/app/bin/k8s-bigip-ctlr"]
-          #Liveness Probe Configuration to be added under command
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-                path: /health
-                port: 8080
-                scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            successThreshold: 1
-            timeoutSeconds: 15
-          #Readiness Probe Configuration to be added under command   
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-                path: /health
-                port: 8080
-                scheme: HTTP
-            initialDelaySeconds: 30
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 15
-          args: [
-            # See the k8s-bigip-ctlr documentation for information about
-            # all config options
-            # https://clouddocs.f5.com/products/connectors/k8s-bigip-ctlr/latest
-            "--bigip-username=$(BIGIP_USERNAME)",
-            "--bigip-password=$(BIGIP_PASSWORD)",
-            # Replace with the IP address or hostname of your BIG-IP device
-            "--bigip-url=192.168.200.91",
-            "--bigip-partition=k8s",
-            "--namespace=default",
-            "--pool-member-type=cluster",
-            "--flannel-name=fl-vxlan",
-            # Logging level
-            "--log-level=DEBUG",
-            "--log-as3-response=true",
-            # AS3 override functionality
-            #"--override-as3-declaration=default/f5-as3-declaration",
-            # Self-signed cert
-            "--insecure=true",
-            "--agent=as3",
-            ]
+                  name: bigip-login
+          image: "somanchit/k8s-bigip-ctlr:as3_317_fix"
+          name: f5-server
+      serviceAccountName: k8s-bigip-ctlr
