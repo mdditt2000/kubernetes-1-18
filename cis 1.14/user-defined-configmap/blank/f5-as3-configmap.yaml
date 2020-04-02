@@ -17,7 +17,7 @@ data:
             "label": "http",
             "remark": "A1 Template",
             "AS3": {
-                "class": "Tenant",
+                "class": "Tenant"
             }
         }
     }
