@@ -96,7 +96,7 @@ args:
      - "--bigip-url=192.168.200.92"
      - "--bigip-partition=k8s"
      - "--namespace=default"
-     - "--pool-member-type=cluster"
+     - "--pool-member-type=cluster"   ----- As per code it will process as clusterIP
      - "--flannel-name=fl-vxlan"
      - "--log-level=DEBUG"
      - "--insecure=true"

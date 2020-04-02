@@ -38,7 +38,7 @@ args:
      - "--bigip-url=192.168.200.92"
      - "--bigip-partition=k8s"
      - "--namespace=default"
-     - "--pool-member-type=nodeport"
+     - "--pool-member-type=nodeport"    ----- As per code it will process as nodeport
      - "--log-level=DEBUG"
      - "--insecure=true"
      - "--manage-ingress=false"
@@ -46,6 +46,25 @@ args:
      - "--agent=as3"
      - "--as3-validation=true"
 ```
+**Note:** As per code it will process as nodeport but the service is configured as type-loadbalance 
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: f5-hello-world
+  name: f5-hello-world
+spec:
+  ports:
+  - name: f5-hello-world
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: f5-hello-world
+  type: LoadBalancer
+  ```
 
 ## BIGIP credentials and RBAC Authentication
 
