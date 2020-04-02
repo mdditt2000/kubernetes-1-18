@@ -1,4 +1,4 @@
-# Kubernetes 1.18 and Container Ingress Controller Quick Start Guide
+# Kubernetes 1.18 and Container Ingress Controller clusterIP Quick Start Guide
 
 This page is created to document K8S 1.18 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
 
@@ -28,7 +28,7 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 
 ##### Initial Setup for BIGIP
 
-BIGIP is connecting to the K8S cluster using cluster mode and therefore BIGIP needs to be part of Container Network Infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIGIP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIGIP for FDB entries and ARP requests 
+BIGIP is connecting to the K8S cluster using cluster mode and therefore BIGIP needs to be part of container network infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIGIP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIGIP for FDB entries and ARP requests 
 
 ```
 tmsh create auth partition k8s
