@@ -4,6 +4,7 @@ F5 Container Ingress Services (CIS) integrates with Kubernetes to automate creat
 ## About theses example / repo
 
 * Install Kubernetes 1.18 [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/k8s%20cluster%20install/install%20guide/install-cluster.md)
-* CIS Quick Start Guide [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/QuickStartGuideCluster.md)
+* CIS clusterIP Quick Start Guide [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/QuickStartGuideCluster.md)
+* CIS nodeport Quick Start Guide [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/QuickStartGuideNode.md)
 * CIS Deployment Guide for HA [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/type-loadbalancer/QuickStartGuide.md)
 * Kubernetes CIS FAQ [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/kubernetes-faq.md)
