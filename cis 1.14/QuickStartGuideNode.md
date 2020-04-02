@@ -46,8 +46,7 @@ args:
      - "--agent=as3"
      - "--as3-validation=true"
 ```
-**Note:** As per code it will process as nodeport but the service is configured as type-loadbalance 
-
+## Create Service for type: NodePort
 ```
 apiVersion: v1
 kind: Service
@@ -63,8 +62,9 @@ spec:
     targetPort: 8080
   selector:
     app: f5-hello-world
-  type: LoadBalancer
-  ```
+  type: NodePort
+```
+Please look for example files in my repo to clone
 
 ## BIGIP credentials and RBAC Authentication
 
