@@ -26,7 +26,7 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIGIP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-**Note** Since using nodeport there is no need for VXLAN tunnels, additional routing. BIGIP can dynamically ARP for the Kube-proxy running on node
+**Note** When using nodeport, pool members represent the kube-proxy service on the node. BIGIP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIGIP can dynamically ARP for the Kube-proxy running on node
 
 ## Create CIS Controller, BIGIP credentials and RBAC Authentication
 
