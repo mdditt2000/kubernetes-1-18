@@ -90,56 +90,20 @@ spec:
 
 Configuration options available in the CIS controller
 ```
-args: [    
-        # See the k8s-bigip-ctlr documentation for information about
-        # all config options
-        # https://clouddocs.f5.com/products/connectors/k8s-bigip-ctlr/latest
-        "--bigip-username=$(BIGIP_USERNAME)",
-        "--bigip-password=$(BIGIP_PASSWORD)",
-        # Replace with the IP address or hostname of your BIG-IP device
-        "--bigip-url=192.168.200.91",
-        "--bigip-partition=k8s",
-        "--namespace=default",
-        "--pool-member-type=cluster",
-        "--flannel-name=fl-vxlan",
-        # Logging level
-        "--log-level=DEBUG",
-        "--log-as3-response=true",
-        AS3 override functionality
-        "--override-as3-declaration=default/f5-as3-configmap",
-        # Self-signed cert
-        "--insecure=true",
-        "--agent=as3",
-       ]
-```
-**Note:** CIS controller is configured with the override-as3-declaration option. This allow the user BIGIP administrator to add global policy, profiles etc to the virtual without having to add additional the need for an annotation. Example below show added WAF and logging. Create this configmap for the configuration to be applied. The configmap, namespace, tenant, AS3 app all need to match. **All the objects need to be defined under the virtual**
-
-```
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: f5-as3-declaration
-  namespace: default
-data:
-  template: |
-    {
-        "declaration": {
-            "k8s_AS3": {
-                "Shared": {
-                    "ingress_10_192_75_108_80": {
-                        "securityLogProfiles": [
-                            {
-                                "bigip": "/Common/Log all requests"
-                            }
-                        ],
-                        "policyWAF": {
-                            "bigip": "/Common/WAF_Policy"
-                        }
-                    }
-                }
-            }
-        }
-    }
+args: 
+     - "--bigip-username=$(BIGIP_USERNAME)"
+     - "--bigip-password=$(BIGIP_PASSWORD)"
+     - "--bigip-url=192.168.200.92"
+     - "--bigip-partition=k8s"
+     - "--namespace=default"
+     - "--pool-member-type=cluster"
+     - "--flannel-name=fl-vxlan"
+     - "--log-level=DEBUG"
+     - "--insecure=true"
+     - "--manage-ingress=false"
+     - "--manage-routes=false"
+     - "--agent=as3"
+     - "--as3-validation=true"
 ```
 
 ## BIGIP credentials and RBAC Authentication
@@ -151,29 +115,4 @@ kubectl create serviceaccount k8s-bigip-ctlr -n kube-system
 kubectl create clusterrolebinding k8s-bigip-ctlr-clusteradmin --clusterrole=cluster-admin --serviceaccount=kube-system:k8s-bigip-ctlr
 kubectl create -f f5-cluster-deployment.yaml
 kubectl create -f f5-bigip-node.yaml
-```
-## Delete kubernetes bigip container connecter, authentication and RBAC
-```
-#delete kubernetes bigip container connecter, authentication and RBAC 
-kubectl delete node bigip1
-kubectl delete deployment k8s-bigip-ctlr-deployment -n kube-system
-kubectl delete clusterrolebinding k8s-bigip-ctlr-clusteradmin
-kubectl delete serviceaccount k8s-bigip-ctlr -n kube-system
-kubectl delete secret bigip-login -n kube-system
-```
-## Create ingress and configmap
-```
-kubectl create -f f5-as3-configmap.yaml
-kubectl create -f f5-k8s-ingress.yaml
-```
-Please look for example files in my repo
-
-## Delete ingress
-```
-kubectl delete -f f5-k8s-ingress.yaml
-``` 
-## Enable logging for AS3
-```
-oc get pod -n kube-system
-oc log -f f5-server-### -n kube-system | grep -i 'as3'
 ```
