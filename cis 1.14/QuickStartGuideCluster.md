@@ -88,7 +88,7 @@ spec:
 
 ## Create CIS Controller, BIGIP credentials and RBAC Authentication
 
-Configuration options available in the CIS controller
+Configuration options available in the CIS controller using user-defined configmap
 ```
 args: 
      - "--bigip-username=$(BIGIP_USERNAME)"
