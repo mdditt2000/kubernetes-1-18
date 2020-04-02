@@ -1,4 +1,4 @@
-# Kubernetes 1.16 and Container Ingress Controller Quick Start Guide
+# Kubernetes 1.18 and Container Ingress Controller Quick Start Guide
 
 This page is created to document K8S 1.16 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
 
@@ -6,18 +6,18 @@ This page is created to document K8S 1.16 with integration of CIS and BIGIP. Ple
 
 Environment parameters
 
-* K8S 1.12 - one master and two worker nodes
-* CIS 1.12
-* AS3: 3.16.5
-* BIG-IP 14.1
+* K8S 1.18 - one master and two worker nodes
+* CIS 1.14
+* AS3: 3.17.1
+* BIG-IP 14.1.2
 
-# Kubernetes 1.16 Install
+# Kubernetes 1.18 Install
 
 K8S is installed on RHEL 7.5 on ESXi
 
-* ks8-1-16-master  
-* ks8-1-16-node1
-* ks8-1-16-node2
+* ks8-1-18-master  
+* ks8-1-18-node1
+* ks8-1-18-node2
 
 ## Prerequisite
 

@@ -30,7 +30,7 @@ spec:
           args: 
             - "--bigip-username=$(BIGIP_USERNAME)"
             - "--bigip-password=$(BIGIP_PASSWORD)"
-            - "--bigip-url=192.168.200.91"
+            - "--bigip-url=192.168.200.92"
             - "--bigip-partition=k8s"
             - "--namespace=default"
             - "--pool-member-type=cluster"
@@ -56,6 +56,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "somanchit/k8s-bigip-ctlr:as3_317_fix"
+          image: "f5networks/k8s-bigip-ctlr:1.14.0"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr

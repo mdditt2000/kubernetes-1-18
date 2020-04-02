@@ -1,4 +1,4 @@
-# Kubernetes 1.16 and Container Ingress Controller Deployment Guide for HA
+# Kubernetes 1.18 and Container Ingress Controller Deployment Guide for HA
 
 This page is created to document K8S 1.16 with integration of CIS and BIGIP
 
