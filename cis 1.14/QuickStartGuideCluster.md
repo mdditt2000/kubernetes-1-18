@@ -1,6 +1,6 @@
 # Kubernetes 1.18 and Container Ingress Controller clusterIP Quick Start Guide
 
-This page is created to document K8S 1.18 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
+This page is created to document K8S 1.18 with integration of CIS and BIG-IP. Please contact me at m.dittmer@f5.com if you have any questions
 
 # Note
 
@@ -9,7 +9,7 @@ Environment parameters
 * K8S 1.18 - one master and two worker nodes
 * CIS 1.14
 * AS3: 3.17.1
-* BIG-IP 14.1.2
+* BIG-IP 14.1.2 (standalone deployment)
 
 # Kubernetes 1.18 Install
 
@@ -21,14 +21,14 @@ K8S is installed on RHEL 7.5 on ESXi
 
 ## Prerequisite
 
-Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIGIP. Follow the link to install AS3
+Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIG-IP. Follow the link to install AS3
  
-* Install AS3 on BIGIP
+* Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-##### Initial Setup for BIGIP
+##### Initial Setup for BIG-IP
 
-BIGIP is connecting to the K8S cluster using cluster mode and therefore BIGIP needs to be part of container network infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIGIP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIGIP for FDB entries and ARP requests 
+BIG-IP is connecting to the K8S cluster using cluster mode and therefore BIG-IP needs to be part of container network infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIG-IP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIG-IP for FDB entries and ARP requests 
 
 ```
 tmsh create auth partition k8s
@@ -39,7 +39,7 @@ tmsh create net self 10.244.20.92 address 10.244.20.92/255.255.0.0 allow-service
 
 ## Deploy flannel for Kubernetes
 
-Add the BIGIP device to the flannel overlay network. Find the VTEP MAC address
+Add the BIG-IP device to the flannel overlay network. Find the VTEP MAC address
 
 ```
 root@(bip-ip-ve2-pme)(cfg-sync Standalone)(Active)(/Common)(tmos)# show net tunnels tunnel fl-vxlan all-properties
@@ -65,7 +65,7 @@ HC Outgoing Multicast Packets                   0
 HC Outgoing Broadcast Packets                   0
 ```
 
-## Create a “dummy” Kubernetes Node for the BIGIP device
+## Create a “dummy” Kubernetes Node for the BIG-IP device
 
 Include all of the flannel Annotations. Define the backend-data and public-ip Annotations with data from the BIG-IP VXLAN:
 
@@ -86,7 +86,7 @@ spec:
   podCIDR: "10.244.20.0/24
 ```
 
-## Create CIS Controller, BIGIP credentials and RBAC Authentication
+## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
 Configuration options available in the CIS controller using user-defined configmap
 ```
@@ -106,7 +106,7 @@ args:
      - "--as3-validation=true"
 ```
 
-## BIGIP credentials and RBAC Authentication
+## BIG-IP credentials and RBAC Authentication
 
 ```
 #create kubernetes bigip container connecter, authentication and RBAC

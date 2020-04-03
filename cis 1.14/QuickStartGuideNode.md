@@ -1,6 +1,6 @@
 # Kubernetes 1.18 and Container Ingress Controller nodeport Quick Start Guide
 
-This page is created to document K8S 1.16 with integration of CIS and BIGIP. Please contact me at m.dittmer@f5.com if you have any questions
+This page is created to document K8S 1.16 with integration of CIS and BIG-IP. Please contact me at m.dittmer@f5.com if you have any questions
 
 # Note
 
@@ -17,18 +17,18 @@ K8S is installed on RHEL 7.5 on ESXi
 
 * ks8-1-18-master  
 * ks8-1-18-node1
-* ks8-1-18-node2
+* ks8-1-18-node2 (standalone deployment)
 
 ## Prerequisite
 
-Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIGIP. Follow the link to install AS3
+Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIG-IP. Follow the link to install AS3
  
-* Install AS3 on BIGIP
+* Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-**Note** When using nodeport, pool members represent the kube-proxy service on the node. BIGIP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIGIP can dynamically ARP for the Kube-proxy running on node
+**Note** When using nodeport, pool members represent the kube-proxy service on the node. BIG-IP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIG-IP can dynamically ARP for the Kube-proxy running on node
 
-## Create CIS Controller, BIGIP credentials and RBAC Authentication
+## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
 Configuration options available in the CIS controller using user-defined configmap
 ```
@@ -66,7 +66,7 @@ spec:
 ```
 Please look for example files in my repo to clone
 
-## BIGIP credentials and RBAC Authentication
+## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
 ```
 #create kubernetes bigip container connecter, authentication and RBAC
