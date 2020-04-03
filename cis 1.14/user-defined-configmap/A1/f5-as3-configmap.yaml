@@ -37,7 +37,8 @@ data:
                         "members": [
                             {
                                 "servicePort": 8080,
-                                "serverAddresses": []
+                                "serverAddresses": [],
+                                "shareNodes": true
                             }
                         ]
                     }
