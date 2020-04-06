@@ -1,6 +1,14 @@
-# Kubernetes 1.18 and Container Ingress Controller nodeport Quick Start Guide
+# Kubernetes 1.18 and Container Ingress Controller NodePort Quick Start Guide
 
-This page is created to document K8S 1.16 with integration of CIS and BIG-IP. Please contact me at m.dittmer@f5.com if you have any questions
+This page is created to document K8S 1.18 with integration of CIS and BIG-IP using NodePort configuration. Benefits of NodePort are:
+
+* Works in any environment (no requirement for SDN)
+* No persistence/visibility to backend Pod
+* Can be deployed for “static” workloads (not ideal)
+
+Similar to vanilla Docker BIG-IP is communicating with a ephemeral port, but in this case the kube-proxy is keeping track of the backend Pod (container). This works well, but the downside is that you have an additional layer of load balancing with the kube-proxy
+
+![Image of NodePort](https://octodex.github.com/images/yaktocat.png)
 
 # Note
 
@@ -9,7 +17,7 @@ Environment parameters
 * K8S 1.18 - one master and two worker nodes
 * CIS 1.14
 * AS3: 3.17.1
-* BIG-IP 14.1.2
+* BIG-IP 14.1.2 (standalone deployment)
 
 # Kubernetes 1.18 Install
 
@@ -17,7 +25,7 @@ K8S is installed on RHEL 7.5 on ESXi
 
 * ks8-1-18-master  
 * ks8-1-18-node1
-* ks8-1-18-node2 (standalone deployment)
+* ks8-1-18-node2
 
 ## Prerequisite
 
