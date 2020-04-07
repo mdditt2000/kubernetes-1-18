@@ -10,16 +10,14 @@ Similar to vanilla Docker BIG-IP is communicating with a ephemeral port, but in 
 
 ![Image of NodePort](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_14-57-25.png)
 
-# Note
-
-Environment parameters
+## Environment parameters
 
 * K8S 1.18 - one master and two worker nodes
 * CIS 1.14
 * AS3: 3.17.1
 * BIG-IP 14.1.2 (standalone deployment)
 
-# Kubernetes 1.18 Install
+## Kubernetes 1.18 Install
 
 K8S is installed on RHEL 7.5 on ESXi
 
@@ -38,17 +36,17 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 
 **Note for BIG-IP partition**
 
-When using agent=as3, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
-When using user-defined configmap with agent=as3, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
 **Note for resources**
 
 Specify what resources are configured with the following three options. This guide is using user-defined configmap
 
-manageRoutes = "manage-routes", false, specify whether or not to manage Route resources")
-manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources")
-manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources")
+* manageRoutes = "manage-routes", false, specify whether or not to manage Route resources")
+* manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources")
+* manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources")
 
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
