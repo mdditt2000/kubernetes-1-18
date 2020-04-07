@@ -102,4 +102,4 @@ kubectl create -f f5-cluster-deployment.yaml
 ```
 Please use the following example files in my repo below:
 
-* CIS deployment yaml files [document](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%201.14/big-ip-92)
+* CIS deployment [CIS deployment repo](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%201.14/big-ip-92)
