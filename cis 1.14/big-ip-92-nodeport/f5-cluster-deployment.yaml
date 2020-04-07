@@ -34,7 +34,6 @@ spec:
             - "--bigip-partition=k8s"
             - "--namespace=default"
             - "--pool-member-type=nodeport"
-            - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
             - "--insecure=true"
             - "--manage-ingress=false"
