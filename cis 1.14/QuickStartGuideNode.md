@@ -46,9 +46,9 @@ When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7
 
 Specify what resources are configured with the following three options. This guide is using user-defined configmap
 
-* manageRoutes = "manage-routes", false, specify whether or not to manage Route resources")
-* manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources")
-* manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources")
+* manageRoutes = "manage-routes", false, specify whether or not to manage Route resources
+* manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources
+* manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources
 
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
@@ -70,6 +70,9 @@ args:
      - "--as3-validation=true"
 ```
 ## Create Service for type: NodePort
+
+Specify type: NodePort in the service to configure NodePort in the service
+
 ```
 apiVersion: v1
 kind: Service
