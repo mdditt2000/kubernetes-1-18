@@ -8,7 +8,7 @@ This page is created to document K8S 1.18 with integration of CIS and BIG-IP usi
 
 Similar to vanilla Docker BIG-IP is communicating with a ephemeral port, but in this case the kube-proxy is keeping track of the backend Pod (container). This works well, but the downside is that you have an additional layer of load balancing with the kube-proxy
 
-![Image of NodePort](https://octodex.github.com/images/yaktocat.png)
+![Image of NodePort](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_14-57-25.png)
 
 # Note
 
@@ -34,7 +34,21 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-**Note** When using nodeport, pool members represent the kube-proxy service on the node. BIG-IP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIG-IP can dynamically ARP for the Kube-proxy running on node
+**Note for networking** When using nodeport, pool members represent the kube-proxy service on the node. BIG-IP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIG-IP can dynamically ARP for the Kube-proxy running on node
+
+**Note for BIG-IP partition**
+
+When using agent=as3, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+
+When using user-defined configmap with agent=as3, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+
+**Note for resources**
+
+Specify what resources are configured with the following three options. This guide is using user-defined configmap
+
+manageRoutes = "manage-routes", false, specify whether or not to manage Route resources")
+manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources")
+manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources")
 
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
@@ -51,6 +65,7 @@ args:
      - "--insecure=true"
      - "--manage-ingress=false"
      - "--manage-routes=false"
+     - "--manage-configmaps=true"
      - "--agent=as3"
      - "--as3-validation=true"
 ```
@@ -82,5 +97,4 @@ kubectl create secret generic bigip-login -n kube-system --from-literal=username
 kubectl create serviceaccount k8s-bigip-ctlr -n kube-system
 kubectl create clusterrolebinding k8s-bigip-ctlr-clusteradmin --clusterrole=cluster-admin --serviceaccount=kube-system:k8s-bigip-ctlr
 kubectl create -f f5-cluster-deployment.yaml
-kubectl create -f f5-bigip-node.yaml
 ```
