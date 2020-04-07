@@ -10,7 +10,7 @@ This page is created to document K8S 1.18 with integration of CIS and BIG-IP usi
 
 The BIG-IP Controller also supports a “cluster” mode where ingress traffic by-passes the Kube-proxy and route traffic directly to the pod. This requires that the BIG-IP have the ability to route to the pod. This could be by using an overlay network that we support (Flannel VXLAN, or OpenShift VXLAN). Leave the kube-proxy intact (no changes to underlying kubernetes infrastructure)
 
-![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_14-57-25.png)
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_17-58-59.png)
 
 ## Environment parameters
 
@@ -34,7 +34,13 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-##### Initial Setup for BIG-IP
+**BIG-IP partition**
+
+When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+
+When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+
+## Initial Setup for BIG-IP
 
 BIG-IP is connecting to the K8S cluster using cluster mode and therefore BIG-IP needs to be part of container network infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIG-IP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIG-IP for FDB entries and ARP requests 
 
@@ -57,20 +63,6 @@ Net::Tunnel: fl-vxlan
 -------------------------------------------------
 MAC Address                   **00:50:56:bb:70:8b**
 Interface Name                           fl-vxlan
-
-Incoming Discard Packets                        0
-Incoming Error Packets                          0
-Incoming Unknown Proto Packets                  0
-Outgoing Discard Packets                        0
-Outgoing Error Packets                         10
-HC Incoming Octets                              0
-HC Incoming Unicast Packets                     0
-HC Incoming Multicast Packets                   0
-HC Incoming Broadcast Packets                   0
-HC Outgoing Octets                              0
-HC Outgoing Unicast Packets                     0
-HC Outgoing Multicast Packets                   0
-HC Outgoing Broadcast Packets                   0
 ```
 
 ## Create a “dummy” Kubernetes Node for the BIG-IP device
@@ -94,6 +86,14 @@ spec:
   podCIDR: "10.244.20.0/24
 ```
 
+**Manage resources**
+
+Specify what resources are configured with the following three options. This guide is using user-defined configmap
+
+* manageRoutes = "manage-routes", false, specify whether or not to manage Route resources
+* manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources
+* manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources
+
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
 Configuration options available in the CIS controller using user-defined configmap
@@ -104,12 +104,13 @@ args:
      - "--bigip-url=192.168.200.92"
      - "--bigip-partition=k8s"
      - "--namespace=default"
-     - "--pool-member-type=cluster"   ----- As per code it will process as clusterIP
+     - "--pool-member-type=cluster" - As per code it will process as clusterIP
      - "--flannel-name=fl-vxlan"
      - "--log-level=DEBUG"
      - "--insecure=true"
      - "--manage-ingress=false"
      - "--manage-routes=false"
+     - "--manage-configmaps=true"
      - "--agent=as3"
      - "--as3-validation=true"
 ```
