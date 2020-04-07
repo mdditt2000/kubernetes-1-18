@@ -36,9 +36,9 @@ spec:
             - "--pool-member-type=nodeport"
             - "--log-level=DEBUG"
             - "--insecure=true"
-            - "--manage-ingress=false"
+            - "--manage-ingress=true"
             - "--manage-routes=false"
-            - "--manage-configmaps=true"
+            - "--manage-configmaps=false"
             - "--as3-validation=true"
             - "--agent=as3"
           command: 
