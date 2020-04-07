@@ -85,7 +85,6 @@ spec:
     app: f5-hello-world
   type: NodePort
 ```
-Please look for example files in my repo to clone
 
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
@@ -96,3 +95,6 @@ kubectl create serviceaccount k8s-bigip-ctlr -n kube-system
 kubectl create clusterrolebinding k8s-bigip-ctlr-clusteradmin --clusterrole=cluster-admin --serviceaccount=kube-system:k8s-bigip-ctlr
 kubectl create -f f5-cluster-deployment.yaml
 ```
+Please use the following example files in my repo below:
+
+* CIS deployment yaml files [document](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%201.14/big-ip-92)
