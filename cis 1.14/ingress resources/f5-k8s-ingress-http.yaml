@@ -1,5 +1,5 @@
 apiVersion: networking.k8s.io/v1beta1
-kind: IngressClass
+kind: Ingress
 metadata:
   annotations:
     # Specify a supported BIG-IP load balancing mode
@@ -21,7 +21,6 @@ metadata:
     virtual-server.f5.com/ip: 10.192.75.108
   name: f5-hello-world
 spec:
-  ingressClassName: external-lb
   backend:
     serviceName: f5-hello-world
     servicePort: 8080
