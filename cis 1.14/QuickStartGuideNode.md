@@ -60,7 +60,7 @@ args:
      - "--bigip-url=192.168.200.92"
      - "--bigip-partition=k8s"
      - "--namespace=default"
-     - "--pool-member-type=nodeport"    ----- As per code it will process as nodeport
+     - "--pool-member-type=nodeport" - As per code it will process as nodeport
      - "--log-level=DEBUG"
      - "--insecure=true"
      - "--manage-ingress=false"
