@@ -32,15 +32,17 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
-**Note for networking** When using nodeport, pool members represent the kube-proxy service on the node. BIG-IP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIG-IP can dynamically ARP for the Kube-proxy running on node
+**Networking** 
 
-**Note for BIG-IP partition**
+When using nodeport, pool members represent the kube-proxy service on the node. BIG-IP needs a local route to the nodes. There is no need for VXLAN tunnels, or Calico. BIG-IP can dynamically ARP for the Kube-proxy running on node
+
+**BIG-IP partition**
 
 When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
 When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
-**Note for resources**
+**Manage resources**
 
 Specify what resources are configured with the following three options. This guide is using user-defined configmap
 
