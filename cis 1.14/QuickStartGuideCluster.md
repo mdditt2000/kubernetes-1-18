@@ -8,17 +8,18 @@ This page is created to document K8S 1.18 with integration of CIS and BIG-IP usi
   * Calico BGP
   * Public Cloud network
 
+The BIG-IP Controller also supports a “cluster” mode where ingress traffic by-passes the Kube-proxy and route traffic directly to the pod. This requires that the BIG-IP have the ability to route to the pod. This could be by using an overlay network that we support (Flannel VXLAN, or OpenShift VXLAN). Leave the kube-proxy intact (no changes to underlying kubernetes infrastructure)
 
-# Note
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_14-57-25.png)
 
-Environment parameters
+## Environment parameters
 
 * K8S 1.18 - one master and two worker nodes
 * CIS 1.14
 * AS3: 3.17.1
 * BIG-IP 14.1.2 (standalone deployment)
 
-# Kubernetes 1.18 Install
+## Kubernetes 1.18 Install
 
 K8S is installed on RHEL 7.5 on ESXi
 
