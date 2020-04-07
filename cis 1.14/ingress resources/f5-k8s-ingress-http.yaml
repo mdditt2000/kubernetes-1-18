@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+kind: IngressClass
 metadata:
   annotations:
     # Specify a supported BIG-IP load balancing mode
