@@ -1,6 +1,13 @@
 # Kubernetes 1.18 and Container Ingress Controller clusterIP Quick Start Guide
 
-This page is created to document K8S 1.18 with integration of CIS and BIG-IP. Please contact me at m.dittmer@f5.com if you have any questions
+This page is created to document K8S 1.18 with integration of CIS and BIG-IP using clusterIP configuration. Benefits of clusterIP are:
+
+* Requires ability to route to Pod
+* Flannel VXLAN, OpenShift VXLAN
+* Alternately Pod rotatable through network i.e.
+  * Calico BGP
+  * Public Cloud network
+
 
 # Note
 
