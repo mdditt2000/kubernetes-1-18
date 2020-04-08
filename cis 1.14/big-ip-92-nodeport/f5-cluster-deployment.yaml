@@ -41,6 +41,7 @@ spec:
             - "--manage-configmaps=false"
             - "--as3-validation=true"
             - "--agent=as3"
+            - "--node-label-selector=node"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
