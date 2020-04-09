@@ -49,7 +49,7 @@ args:
 - "--manage-configmaps=true"
 - "--agent=as3"
 - "--as3-validation=true"
-**- "--node-label-selector=f5role=worker"**
+**-"--node-label-selector=f5role=worker"**
 ```
 
 ---
