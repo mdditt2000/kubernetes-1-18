@@ -63,7 +63,7 @@ Use the label node <node name> to create a new label for the node. This works in
 Show the node labels
 ```
 # kubectl get nodes
-NAME                               STATUS   ROLES    AGE     VERSION
+NAME                         STATUS   ROLES    AGE     VERSION
 k8s-1-18-master.example.com   Ready    master   7d19h   v1.18.0
 k8s-1-18-node1.example.com    Ready    f5role   7d19h   v1.18.0
 k8s-1-18-node2.example.com    Ready    f5role   7d19h   v1.18.0

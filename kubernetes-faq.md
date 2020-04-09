@@ -16,6 +16,40 @@ Github issue https://github.com/F5Networks/k8s-bigip-ctlr/issues/797
 
 ---
 
+## Manage node labels
+
+**Problem:** When using nodeport by default all nodes from the cluster will be added to the pool. In most cases you only want to add the worker nodes and exclude master nodes. To exclude master nodes using the label node-role.kubernetes.io/node parameter
+
+**Solution:** Use the label node to create a new label for the node. This works in conjunction with the node-label-selector configured in CIS to only add nodes to the pool with the associated . In this quick start guide CIS will only add the nodes with label worker to the pool. Excluding the master node from the pool
+
+# kubectl label nodes k8s-1-18-node1.example.com node-role.kubernetes.io/f5role=worker
+# kubectl label nodes k8s-1-18-node2.example.com node-role.kubernetes.io/f5role=worker
+
+Show the node labels
+
+# kubectl get nodes
+NAME                         STATUS   ROLES    AGE     VERSION
+k8s-1-18-master.example.com   Ready    master   7d19h   v1.18.0
+k8s-1-18-node1.example.com    Ready    f5role   7d19h   v1.18.0
+k8s-1-18-node2.example.com    Ready    f5role   7d19h   v1.18.0
+args:
+- "--bigip-username=$(BIGIP_USERNAME)"
+- "--bigip-password=$(BIGIP_PASSWORD)"
+- "--bigip-url=192.168.200.92"
+- "--bigip-partition=k8s"
+- "--namespace=default"
+- "--pool-member-type=nodeport" - As per code it will process as nodeport
+- "--log-level=DEBUG"
+- "--insecure=true"
+- "--manage-ingress=false"
+- "--manage-routes=false"
+- "--manage-configmaps=true"
+- "--agent=as3"
+- "--as3-validation=true"
+**- "--node-label-selector=f5role=worker"**
+
+---
+
 ## CIS log messages
 
 Information regarding the following error messages and what do they mean
