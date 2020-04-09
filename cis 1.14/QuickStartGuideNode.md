@@ -50,6 +50,28 @@ Specify what resources are configured with the following three options. This gui
 * manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources
 * manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources
 
+**Manage node labels**
+
+When using nodeport by default all nodes from the cluster will be added to the pool. In most cases you only want to add the worker nodes and exclude master nodes. To exclude master nodes using the label node-role.kubernetes.io/node parameter
+
+Use the label node <node name> to create a new label for the node. This works in conjunction with the node-label-selector configured in CIS to only add nodes to the pool with the associated <node name>. In this quick start guide CIS will only add the nodes with label worker to the pool. Excluding the master node from the pool 
+
+```
+# kubectl label nodes k8s-1-18-node1.example.com node-role.kubernetes.io/f5role=worker
+
+# kubectl label nodes k8s-1-18-node2.example.com node-role.kubernetes.io/f5role=worker
+```
+
+Show the node labels
+
+```
+# kubectl get nodes
+NAME                               STATUS   ROLES    AGE     VERSION
+k8s-1-18-master.example.com   Ready    master   7d19h   v1.18.0
+k8s-1-18-node1.example.com    Ready    f5role   7d19h   v1.18.0
+k8s-1-18-node2.example.com    Ready    f5role   7d19h   v1.18.0
+```
+
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
 Configuration options available in the CIS controller using user-defined configmap
@@ -68,6 +90,7 @@ args:
      - "--manage-configmaps=true"
      - "--agent=as3"
      - "--as3-validation=true"
+     - "--node-label-selector=f5role=worker"
 ```
 ## Create Service for type: NodePort
 
