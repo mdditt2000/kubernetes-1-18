@@ -41,7 +41,7 @@ args:
 - "--bigip-url=192.168.200.92"
 - "--bigip-partition=k8s"
 - "--namespace=default"
-- "--pool-member-type=nodeport" - As per code it will process as nodeport
+- "--pool-member-type=nodeport"
 - "--log-level=DEBUG"
 - "--insecure=true"
 - "--manage-ingress=false"
@@ -49,7 +49,7 @@ args:
 - "--manage-configmaps=true"
 - "--agent=as3"
 - "--as3-validation=true"
-**-"--node-label-selector=f5role=worker"**
+- "--node-label-selector=f5role=worker" - set the node label
 ```
 
 ---
