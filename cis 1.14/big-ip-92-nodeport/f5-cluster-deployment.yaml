@@ -41,7 +41,7 @@ spec:
             - "--manage-configmaps=false"
             - "--as3-validation=true"
             - "--agent=as3"
-            - "--node-label-selector=node-role.kubernetes.io/worker"
+            - "--node-label-selector=f5role=worker"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
