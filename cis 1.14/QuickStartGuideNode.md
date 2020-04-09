@@ -58,12 +58,9 @@ Use the label node <node name> to create a new label for the node. This works in
 
 ```
 # kubectl label nodes k8s-1-18-node1.example.com node-role.kubernetes.io/f5role=worker
-
 # kubectl label nodes k8s-1-18-node2.example.com node-role.kubernetes.io/f5role=worker
 ```
-
 Show the node labels
-
 ```
 # kubectl get nodes
 NAME                               STATUS   ROLES    AGE     VERSION
