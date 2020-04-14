@@ -41,7 +41,6 @@ spec:
             - "--manage-routes=false"
             - "--manage-configmaps=true"
             - "--as3-validation=true"
-            #- "--overrideAS3=false"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
