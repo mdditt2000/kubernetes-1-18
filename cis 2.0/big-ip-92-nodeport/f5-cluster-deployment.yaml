@@ -40,7 +40,7 @@ spec:
             - "--manage-routes=false"
             - "--manage-configmaps=false"
             - "--as3-validation=true"
-            - "--node-label-selector=f5role=worker"
+            #- "--node-label-selector=f5role=worker"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
