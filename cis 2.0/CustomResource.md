@@ -48,7 +48,7 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 * All the overhead of LTM CCCL processing is removed
 * LTM(from AS3) and NET(from CCCL) will be created in CIS Managed Partition, which is created by User
 
-![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-17-43.png)
 
 **BIG-IP partition**
 
