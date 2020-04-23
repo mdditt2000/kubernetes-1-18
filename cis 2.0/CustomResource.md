@@ -2,20 +2,20 @@
 
 This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.  
 
-What are CRD? Custom resources are extensions of the Kubernetes API. 
+## What are CRDs? Custom resources are extensions of the Kubernetes API. 
 
 * A resource is an endpoint in the Kubernetes API that stores a collection of API objects of a certain kind; for example, the built-in pods resource contains a collection of Pod objects.
 * A custom resource is an extension of the Kubernetes API that is not necessarily available in a default Kubernetes installation. It represents a customization of a particular Kubernetes installation. However, many core Kubernetes functions are now built using custom resources, making Kubernetes more modular.
 *  Custom resources can appear and disappear in a running cluster through dynamic registration, and cluster admins can update custom resources independently of the cluster itself. Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
 
-F5 CRD Custom Controller
+## How F5 CRDs Custom Controller Works
 
 * Controllers registers to the kubernetes client-go using informers to retrieve service, endpoint, virtual server and node changes
 * Resource Queue holds the resources to be processed
 * Virtual Server is the primary citizen.  Any changes in Service, Endpoint, Node will indirectly affect Virtual Server
 * Worker fetches the affected Virtual Servers from Resource Queue to process them
 
-![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_17-58-59.png)
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/Picture1.png)
 
 
 ## Environment parameters
