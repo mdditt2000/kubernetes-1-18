@@ -1,22 +1,28 @@
-# Kubernetes 1.18 and Container Ingress Controller clusterIP Quick Start Guide
+# Kubernetes 1.18 and Container Ingress Controller using Custom Resource Definitions 
 
-This page is created to document K8S 1.18 with integration of CIS and BIG-IP using clusterIP configuration. Benefits of clusterIP are:
+This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.  
 
-* Requires ability to route to Pod
-* Flannel VXLAN, OpenShift VXLAN
-* Alternately Pod rotatable through network i.e.
-  * Calico BGP
-  * Public Cloud network
+What are CRD? Custom resources are extensions of the Kubernetes API. 
 
-The BIG-IP Controller also supports a “cluster” mode where ingress traffic by-passes the Kube-proxy and route traffic directly to the pod. This requires that the BIG-IP have the ability to route to the pod. This could be by using an overlay network that we support (Flannel VXLAN, or OpenShift VXLAN). Leave the kube-proxy intact (no changes to underlying kubernetes infrastructure)
+* A resource is an endpoint in the Kubernetes API that stores a collection of API objects of a certain kind; for example, the built-in pods resource contains a collection of Pod objects.
+* A custom resource is an extension of the Kubernetes API that is not necessarily available in a default Kubernetes installation. It represents a customization of a particular Kubernetes installation. However, many core Kubernetes functions are now built using custom resources, making Kubernetes more modular.
+*  Custom resources can appear and disappear in a running cluster through dynamic registration, and cluster admins can update custom resources independently of the cluster itself. Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
+
+F5 CRD Custom Controller
+
+* Controllers registers to the kubernetes client-go using informers to retrieve service, endpoint, virtual server and node changes
+* Resource Queue holds the resources to be processed
+* Virtual Server is the primary citizen.  Any changes in Service, Endpoint, Node will indirectly affect Virtual Server
+* Worker fetches the affected Virtual Servers from Resource Queue to process them
 
 ![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/diagrams/2020-04-06_17-58-59.png)
+
 
 ## Environment parameters
 
 * K8S 1.18 - one master and two worker nodes
-* CIS 1.14
-* AS3: 3.17.1
+* CIS 2.0 beta image
+* AS3: 3.18
 * BIG-IP 14.1.2 (standalone deployment)
 
 ## Kubernetes 1.18 Install
@@ -29,7 +35,7 @@ K8S is installed on RHEL 7.5 on ESXi
 
 ## Prerequisite
 
-Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIG-IP. Follow the link to install AS3
+Since CIS is using the AS3 declarative API we need the AS3 extension installed on BIG-IP. Follow the link to install AS3. AS3.18 is required for CIS 2.0
  
 * Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
