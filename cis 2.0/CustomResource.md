@@ -12,7 +12,7 @@ This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.
 
 CIS using the following schema for CRDs
 
-![Image of Schema](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
+![Image of Schema](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-33-54.png)
 
 ## How F5 CRDs Custom Controller Works
 
