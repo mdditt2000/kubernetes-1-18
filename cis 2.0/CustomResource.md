@@ -15,7 +15,7 @@ This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.
 * Virtual Server is the primary citizen.  Any changes in Service, Endpoint, Node will indirectly affect Virtual Server
 * Worker fetches the affected Virtual Servers from Resource Queue to process them
 
-![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/Picture1.png)
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
 
 
 ## Environment parameters
