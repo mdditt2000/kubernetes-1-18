@@ -8,6 +8,12 @@ This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.
 * A custom resource is an extension of the Kubernetes API that is not necessarily available in a default Kubernetes installation. It represents a customization of a particular Kubernetes installation. However, many core Kubernetes functions are now built using custom resources, making Kubernetes more modular.
 *  Custom resources can appear and disappear in a running cluster through dynamic registration, and cluster admins can update custom resources independently of the cluster itself. Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
 
+## CIS CRD Schema Validation using OpenAPI
+
+CIS using the following schema for CRDs
+
+![Image of Schema](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
+
 ## How F5 CRDs Custom Controller Works
 
 * Controllers registers to the kubernetes client-go using informers to retrieve service, endpoint, virtual server and node changes
@@ -52,30 +58,13 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 
 **BIG-IP partition**
 
+Single Partition (Back to Awesome)
+
+Still in works
+
 When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
 When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
-
-## Create a “dummy” Kubernetes Node for the BIG-IP device
-
-Include all of the flannel Annotations. Define the backend-data and public-ip Annotations with data from the BIG-IP VXLAN:
-
-```
-apiVersion: v1
-kind: Node
-metadata:
-  name: bigip1
-  annotations:
-    #Replace MAC with your BIGIP Flannel VXLAN Tunnel MAC
-    flannel.alpha.coreos.com/backend-data: '{"VtepMAC":"00:50:56:bb:70:8b"}'
-    flannel.alpha.coreos.com/backend-type: "vxlan"
-    flannel.alpha.coreos.com/kube-subnet-manager: "true"
-    #Replace IP with Self-IP for your deployment
-    flannel.alpha.coreos.com/public-ip: "192.168.200.92"
-spec:
-  #Replace Subnet with your BIGIP Flannel Subnet
-  podCIDR: "10.244.20.0/24
-```
 
 **Manage resources**
 
