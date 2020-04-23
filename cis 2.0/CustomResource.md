@@ -74,9 +74,28 @@ Specify what resources are configured with the following three options. This gui
 * manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources
 * manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources
 
+**CRD Alpha**
+
+Image: subbuv26/k8s-bigip-ctlr:crd_build
+ 
+Supports the following features:
+* Supports Custom type: VirtualServer
+* Responds to changes in VirtualServer resources
+* Responds to changes in Services, Endpoints and Nodes
+* Uses only one partition in BIG-IP which is created by user
+ 
+Observations to be made:
+
+* No logs related to App Manager
+* No CCCL logs related to LTM
+* LTM and Net resources in the same partition that is configured
+* Traffic validation
+
 ## Create CIS Controller, BIG-IP credentials and RBAC Authentication
 
-Configuration options available in the CIS controller using user-defined configmap
+Configuration options available in the CIS controller using custom resource mode. 
+
+**note** that a deployment parameter needs to be given as “--custom-resource-mode=true” which deploying CIS.
 ```
 args: 
      - "--bigip-username=$(BIGIP_USERNAME)"
@@ -90,7 +109,8 @@ args:
      - "--insecure=true"
      - "--manage-ingress=false"
      - "--manage-routes=false"
-     - "--manage-configmaps=true"
+     - "--manage-configmaps=false"
+     - “--custom-resource-mode=true”
      - "--agent=as3"
      - "--as3-validation=true"
 ```
