@@ -36,9 +36,10 @@ spec:
             - "--pool-member-type=nodeport"
             - "--log-level=DEBUG"
             - "--insecure=true"
-            - "--manage-ingress=true"
+            - "--manage-ingress=false"
             - "--manage-routes=false"
             - "--manage-configmaps=false"
+            - “--custom-resource-mode=true”
             - "--as3-validation=true"
             #- "--node-label-selector=f5role=worker"
           command: 
@@ -56,6 +57,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "snatra27/k8s-bigip-ctlr:agent_5"
+          image: "subbuv26/k8s-bigip-ctlr:crd_build"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr
