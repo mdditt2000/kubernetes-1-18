@@ -17,7 +17,6 @@ This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.
 
 ![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
 
-
 ## Environment parameters
 
 * K8S 1.18 - one master and two worker nodes
@@ -40,36 +39,22 @@ Since CIS is using the AS3 declarative API we need the AS3 extension installed o
 * Install AS3 on BIG-IP
 https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
 
+## Custom Resource to BIG-IP
+
+* Validate the Virtual Server
+* Process each valid Virtual Server to populate to a common structure that holds all the Virtual Servers
+* Update Pool Members and L7 LTM policy actions for each Virtual Server
+* Controller with help of  Vxlan Manager to create only NET configuration in CCCL as AS3 cannot update L2-L3
+* All the overhead of LTM CCCL processing is removed
+* LTM(from AS3) and NET(from CCCL) will be created in CIS Managed Partition, which is created by User
+
+![Image of clusterIP](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
+
 **BIG-IP partition**
 
 When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
 
 When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
-
-## Initial Setup for BIG-IP
-
-BIG-IP is connecting to the K8S cluster using cluster mode and therefore BIG-IP needs to be part of container network infrastructure (CNI). Choices are BGP or VXLAN. This quick start guide is created using VXLAN (Flannel). BIG-IP tmsh commands below creates the partition and VXLAN tunnel. CIS needs a partition on BIG-IP for FDB entries and ARP requests 
-
-```
-tmsh create auth partition k8s
-tmsh create net tunnels vxlan fl-vxlan port 8472 flooding-type none
-tmsh create net tunnels tunnel fl-vxlan key 1 profile fl-vxlan local-address 192.168.200.92
-tmsh create net self 10.244.20.92 address 10.244.20.92/255.255.0.0 allow-service none vlan fl-vxlan
-```
-
-## Deploy flannel for Kubernetes
-
-Add the BIG-IP device to the flannel overlay network. Find the VTEP MAC address
-
-```
-root@(bip-ip-ve2-pme)(cfg-sync Standalone)(Active)(/Common)(tmos)# show net tunnels tunnel fl-vxlan all-properties
-
--------------------------------------------------
-Net::Tunnel: fl-vxlan
--------------------------------------------------
-MAC Address                   **00:50:56:bb:70:8b**
-Interface Name                           fl-vxlan
-```
 
 ## Create a “dummy” Kubernetes Node for the BIG-IP device
 
