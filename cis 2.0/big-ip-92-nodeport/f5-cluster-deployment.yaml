@@ -33,7 +33,7 @@ spec:
             - "--bigip-url=192.168.200.92"
             - "--bigip-partition=k8s"
             - "--namespace=default"
-            - "--namespace=monitor"
+            - "--namespace=monitoring"
             - "--pool-member-type=nodeport"
             - "--log-level=DEBUG"
             - "--insecure=true"
