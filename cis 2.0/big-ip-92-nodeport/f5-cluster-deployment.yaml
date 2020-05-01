@@ -40,10 +40,10 @@ spec:
             - "--manage-ingress=true"
             - "--manage-routes=false"
             - "--manage-configmaps=false"
+            - "--http-listen-address=0.0.0.0:8080"
             #- "--custom-resource-mode=true"
             - "--as3-validation=true"
             #- "--node-label-selector=f5role=worker"
-            - "--http-listen-address=0.0.0.0:8080”
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
