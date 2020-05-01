@@ -43,6 +43,7 @@ spec:
             #- "--custom-resource-mode=true"
             - "--as3-validation=true"
             #- "--node-label-selector=f5role=worker"
+            - "--http-listen-address=0.0.0.0:8080”
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
