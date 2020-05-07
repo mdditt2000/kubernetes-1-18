@@ -42,7 +42,7 @@ spec:
             - "--manage-configmaps=false"
             - "--http-listen-address=0.0.0.0:8080"
             - "--custom-resource-mode=true"
-            - "--as3-validation=false"
+            - "--as3-validation=true"
             #- "--node-label-selector=f5role=worker"
           command: 
             - /app/bin/k8s-bigip-ctlr
