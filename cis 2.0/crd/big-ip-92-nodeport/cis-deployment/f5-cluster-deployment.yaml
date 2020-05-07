@@ -40,8 +40,8 @@ spec:
             - "--manage-ingress=false"
             - "--manage-routes=false"
             - "--manage-configmaps=false"
-            - "--http-listen-address=0.0.0.0:8080"
             - "--custom-resource-mode=true"
+            - "--http-listen-address=0.0.0.0:8080"
             - "--as3-validation=true"
             #- "--node-label-selector=f5role=worker"
           command: 

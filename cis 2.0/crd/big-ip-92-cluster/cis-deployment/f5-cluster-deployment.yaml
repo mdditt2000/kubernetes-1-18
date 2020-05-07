@@ -39,7 +39,9 @@ spec:
             - "--insecure=true"
             - "--manage-ingress=false"
             - "--manage-routes=false"
-            - "--manage-configmaps=true"
+            - "--manage-configmaps=false"
+            - "--custom-resource-mode=true"
+            - "--http-listen-address=0.0.0.0:8080"
             - "--as3-validation=true"
           command: 
             - /app/bin/k8s-bigip-ctlr
@@ -56,6 +58,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "snatra27/k8s-bigip-ctlr:agent_5"
+          image: "chandrajakkidi/k8s-bigip-ctlr:ubi_2.0_build1"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr
