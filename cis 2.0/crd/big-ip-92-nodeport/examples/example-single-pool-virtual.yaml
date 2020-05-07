@@ -8,6 +8,6 @@ spec:
   host: mysite.f5demo.com
   virtualServerAddress: "10.192.75.108"
   pools:
-  - path: /
+  - path: /foo
     service: f5-hello-world
     servicePort: 8080
