@@ -43,6 +43,7 @@ spec:
             - "--custom-resource-mode=true"
             - "--http-listen-address=0.0.0.0:8080"
             - "--as3-validation=true"
+            - "--log-as3-response=true"
             #- "--node-label-selector=f5role=worker"
           command: 
             - /app/bin/k8s-bigip-ctlr
