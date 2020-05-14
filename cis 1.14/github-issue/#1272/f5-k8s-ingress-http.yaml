@@ -1,14 +1,16 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
-  annotations:
-    virtual-server.f5.com/ip: 10.192.75.110
+metadata: 
+  annotations: 
+    virtual-server.f5.com/ip: "172.16.3.8"
   name: argocd
-spec:
-  rules:
-  - host: argocd.cluster-dev-1.test.int
-      http:
-        paths:
-        - backend:
-            serviceName: f5-hello-world
-            servicePort: 8080
+spec: 
+  rules: 
+    - 
+      host: argocd.cluster-dev-1.test.int
+      http: 
+        paths: 
+          - 
+            backend: 
+              serviceName: f5-hello-world
+              servicePort: 80
