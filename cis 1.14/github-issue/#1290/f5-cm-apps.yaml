@@ -1,200 +1,196 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-name: f5-cm-apps
-namespace: static-as3
-selfLink: /api/v1/namespaces/static-as3/configmaps/f5-cm-apps
-uid: 4875c28c-0cad-4942-b40b-2978745ba844
-resourceVersion: '7636258'
-creationTimestamp: '2020-05-06T13:10:02Z'
-labels:
-as3: 'true'
-f5type: virtual-server
+  name: f5-cm-apps
+  namespace: default
+  labels:
+    f5type: virtual-server
+    as3: "true"
 data:
-template: |
-  {
-    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
-    "class": "AS3",
-    "action": "deploy",
-    "persist": true,
-    "declaration": {
-        "class": "ADC",
-        "schemaVersion": "3.19.0",
-        "id": "d492687a-bd1d-478d-987b-9590253c5099",
-        "label": "Sample AS3",
-        "remark": "Simple HTTPS Service",
-        "T1aplikacje": {
-            "class": "Tenant",
-            "static-as3": {
-                "class": "Application",
-                "template": "generic",
-                "V1apkaStaticAS3": {
-                    "class": "Service_HTTPS",
-                    "virtualAddresses": [
-                        "10.232.10.106"
-                    ],
-                    "enable": true,
-                    "persistenceMethods": [
-                        "source-address"
-                    ],
-                    "virtualPort": 443,
-                    "profileTCP": "mobile",
-                    "pool": "webpool",
-                    "profileHTTP": {
-                        "use": "http_prof_mid_security"
+  template: |
+    {
+        "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
+        "class": "AS3",
+        "action": "deploy",
+        "persist": true,
+        "declaration": {
+            "class": "ADC",
+            "schemaVersion": "3.19.0",
+            "id": "d492687a-bd1d-478d-987b-9590253c5099",
+            "label": "Sample AS3",
+            "remark": "Simple HTTPS Service",
+            "T1aplikacje": {
+                "class": "Tenant",
+                "static-as3": {
+                    "class": "Application",
+                    "template": "generic",
+                    "V1apkaStaticAS3": {
+                        "class": "Service_HTTPS",
+                        "virtualAddresses": [
+                            "10.232.10.106"
+                        ],
+                        "enable": true,
+                        "persistenceMethods": [
+                            "source-address"
+                        ],
+                        "virtualPort": 443,
+                        "profileTCP": "mobile",
+                        "pool": "webpool",
+                        "profileHTTP": {
+                            "use": "http_prof_mid_security"
+                        },
+                        "profileHTTPAcceleration": {
+                            "use": "my_caching"
+                        },
+                        "profileHTTPCompression": {
+                            "use": "my_compression"
+                        },
+                        "iRules": [
+                            "irule1"
+                        ],
+                        "redirect80": true,
+                        "serverTLS": {
+                            "bigip": "/Common/myclientssl"
+                        }
                     },
-                    "profileHTTPAcceleration": {
-                        "use": "my_caching"
+                    "webpool": {
+                        "class": "Pool",
+                        "loadBalancingMode": "dynamic-ratio-member",
+                        "monitors": [
+                            "http"
+                        ],
+                        "reselectTries": 1,
+                        "members": [
+                            {
+                                "servicePort": 80,
+                                "serverAddresses": []
+                            }
+                        ]
                     },
-                    "profileHTTPCompression": {
-                        "use": "my_compression"
+                    "irule1": {
+                        "class": "iRule",
+                        "iRule": "when CLIENT_ACCEPTED { }"
                     },
-                    "iRules": [
-                        "irule1"
-                    ],
-                    "redirect80": true,
-                    "serverTLS": {
-                        "bigip": "/Common/myclientssl"
+                    "http_prof_mid_security": {
+                        "class": "HTTP_Profile",
+                        "proxyType": "reverse",
+                        "requestChunking": "rechunk",
+                        "responseChunking": "rechunk",
+                        "allowedResponseHeaders": [
+                            "content-type",
+                            "set-cookie",
+                            "location",
+                            "date",
+                            "expires",
+                            "cache-control",
+                            "pragma",
+                            "vary",
+                            "content-encoding",
+                            "keep-alive",
+                            "connection"
+                        ],
+                        "fallbackRedirect": "http://www.plus.pl",
+                        "xForwardedFor": true
+                    },
+                    "my_caching": {
+                        "class": "HTTP_Acceleration_Profile",
+                        "parentProfile": {
+                            "bigip": "/Common/webacceleration"
+                        },
+                        "maximumObjectSize": 200000,
+                        "maximumEntries": 5000,
+                        "maximumAge": 120
+                    },
+                    "my_compression": {
+                        "class": "HTTP_Compress",
+                        "minimumSize": 2000
                     }
                 },
-                "webpool": {
-                    "class": "Pool",
-                    "loadBalancingMode": "dynamic-ratio-member",
-                    "monitors": [
-                        "http"
-                    ],
-                    "reselectTries": 1,
-                    "members": [
-                        {
-                            "servicePort": 80,
-                            "serverAddresses": []
+                "f5-demo-as3": {
+                    "class": "Application",
+                    "template": "generic",
+                    "V1apkaF5DEMOAS3": {
+                        "class": "Service_HTTPS",
+                        "virtualAddresses": [
+                            "10.232.10.108"
+                        ],
+                        "enable": true,
+                        "persistenceMethods": [
+                            "source-address"
+                        ],
+                        "virtualPort": 443,
+                        "profileTCP": "mobile",
+                        "pool": "webpoolwebhook",
+                        "profileHTTP": {
+                            "use": "http_prof_mid_security"
+                        },
+                        "profileHTTPAcceleration": {
+                            "use": "my_caching"
+                        },
+                        "profileHTTPCompression": {
+                            "use": "my_compression"
+                        },
+                        "iRules": [
+                            "irule1"
+                        ],
+                        "redirect80": true,
+                        "serverTLS": {
+                            "bigip": "/Common/myclientssl"
                         }
-                    ]
-                },
-                "irule1": {
-                    "class": "iRule",
-                    "iRule": "when CLIENT_ACCEPTED { }"
-                },
-                "http_prof_mid_security": {
-                    "class": "HTTP_Profile",
-                    "proxyType": "reverse",
-                    "requestChunking": "rechunk",
-                    "responseChunking": "rechunk",
-                    "allowedResponseHeaders": [
-                        "content-type",
-                        "set-cookie",
-                        "location",
-                        "date",
-                        "expires",
-                        "cache-control",
-                        "pragma",
-                        "vary",
-                        "content-encoding",
-                        "keep-alive",
-                        "connection"
-                    ],
-                    "fallbackRedirect": "http://www.plus.pl",
-                    "xForwardedFor": true
-                },
-                "my_caching": {
-                    "class": "HTTP_Acceleration_Profile",
-                    "parentProfile": {
-                        "bigip": "/Common/webacceleration"
                     },
-                    "maximumObjectSize": 200000,
-                    "maximumEntries": 5000,
-                    "maximumAge": 120
-                },
-                "my_compression": {
-                    "class": "HTTP_Compress",
-                    "minimumSize": 2000
-                }
-            },
-            "f5-demo-as3": {
-                "class": "Application",
-                "template": "generic",
-                "V1apkaF5DEMOAS3": {
-                    "class": "Service_HTTPS",
-                    "virtualAddresses": [
-                        "10.232.10.108"
-                    ],
-                    "enable": true,
-                    "persistenceMethods": [
-                        "source-address"
-                    ],
-                    "virtualPort": 443,
-                    "profileTCP": "mobile",
-                    "pool": "webpoolwebhook",
-                    "profileHTTP": {
-                        "use": "http_prof_mid_security"
+                    "webpoolwebhook": {
+                        "class": "Pool",
+                        "loadBalancingMode": "dynamic-ratio-member",
+                        "monitors": [
+                            "http"
+                        ],
+                        "reselectTries": 1,
+                        "members": [
+                            {
+                                "servicePort": 80,
+                                "serverAddresses": []
+                            }
+                        ]
                     },
-                    "profileHTTPAcceleration": {
-                        "use": "my_caching"
+                    "irule1": {
+                        "class": "iRule",
+                        "iRule": "when CLIENT_ACCEPTED { }"
                     },
-                    "profileHTTPCompression": {
-                        "use": "my_compression"
+                    "http_prof_mid_security": {
+                        "class": "HTTP_Profile",
+                        "proxyType": "reverse",
+                        "requestChunking": "rechunk",
+                        "responseChunking": "rechunk",
+                        "allowedResponseHeaders": [
+                            "content-type",
+                            "set-cookie",
+                            "location",
+                            "date",
+                            "expires",
+                            "cache-control",
+                            "pragma",
+                            "vary",
+                            "content-encoding",
+                            "keep-alive",
+                            "connection"
+                        ],
+                        "fallbackRedirect": "http://www.plus.pl",
+                        "xForwardedFor": true
                     },
-                    "iRules": [
-                        "irule1"
-                    ],
-                    "redirect80": true,
-                    "serverTLS": {
-                        "bigip": "/Common/myclientssl"
+                    "my_caching": {
+                        "class": "HTTP_Acceleration_Profile",
+                        "parentProfile": {
+                            "bigip": "/Common/webacceleration"
+                        },
+                        "maximumObjectSize": 200000,
+                        "maximumEntries": 5000,
+                        "maximumAge": 120
+                    },
+                    "my_compression": {
+                        "class": "HTTP_Compress",
+                        "minimumSize": 2000
                     }
-                },
-                "webpoolwebhook": {
-                    "class": "Pool",
-                    "loadBalancingMode": "dynamic-ratio-member",
-                    "monitors": [
-                        "http"
-                    ],
-                    "reselectTries": 1,
-                    "members": [
-                        {
-                            "servicePort": 80,
-                            "serverAddresses": []
-                        }
-                    ]
-                },
-                "irule1": {
-                    "class": "iRule",
-                    "iRule": "when CLIENT_ACCEPTED { }"
-                },
-                "http_prof_mid_security": {
-                    "class": "HTTP_Profile",
-                    "proxyType": "reverse",
-                    "requestChunking": "rechunk",
-                    "responseChunking": "rechunk",
-                    "allowedResponseHeaders": [
-                        "content-type",
-                        "set-cookie",
-                        "location",
-                        "date",
-                        "expires",
-                        "cache-control",
-                        "pragma",
-                        "vary",
-                        "content-encoding",
-                        "keep-alive",
-                        "connection"
-                    ],
-                    "fallbackRedirect": "http://www.plus.pl",
-                    "xForwardedFor": true
-                },
-                "my_caching": {
-                    "class": "HTTP_Acceleration_Profile",
-                    "parentProfile": {
-                        "bigip": "/Common/webacceleration"
-                    },
-                    "maximumObjectSize": 200000,
-                    "maximumEntries": 5000,
-                    "maximumAge": 120
-                },
-                "my_compression": {
-                    "class": "HTTP_Compress",
-                    "minimumSize": 2000
                 }
             }
         }
     }
-}
