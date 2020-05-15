@@ -111,7 +111,6 @@ args:
      - "--manage-routes=false"
      - "--manage-configmaps=false"
      - “--custom-resource-mode=true”
-     - "--agent=as3"
      - "--as3-validation=true"
 ```
 

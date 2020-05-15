@@ -31,7 +31,7 @@ spec:
             - "--bigip-username=$(BIGIP_USERNAME)"
             - "--bigip-password=$(BIGIP_PASSWORD)"
             - "--bigip-url=192.168.200.92"
-            - "--bigip-partition=k8s"
+            - "--bigip-partition=k8szoneb"
             - "--namespace=default"
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
