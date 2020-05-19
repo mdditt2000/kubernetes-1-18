@@ -127,10 +127,40 @@ kubectl create -f f5-cluster-deployment.yaml
 kubectl create -f f5-bigip-node.yaml
 ```
 
-## Create the F5 CIS schema
+## Create the CIS CRD schema
 
 To use CRD with CIS create the schema before creating any CRDs
 ```
+[root@k8s-1-18-master crd-examples]# kubectl create -f customresourcedefinition.yaml
+customresourcedefinition.apiextensions.k8s.io/virtualservers.cis.f5.com created
+```
+
+## Create the CIS CRD
+Create a custom resource defintion for a simple application using the following example
+```
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer
+metadata:
+  name: f5-hello-world
+  labels:
+    f5cr: "true"
+spec:
+  virtualServerAddress: "10.192.75.106"
+  pools:
+  - path: /
+    service: f5-hello-world
+    servicePort: 8080
+```
+Use the kubectl command to create the CRD 
+```
+[root@k8s-1-18-master crd-examples]# kubectl create -f example-single-pool-virtual.yaml
+virtualserver.cis.f5.com/f5-hello-world created
+```
+Logs dispaly CRD created on BIG-IP using AS3 API
+```
+2020/05/19 23:22:17 [DEBUG] [AS3] PostManager Accepted the configuration
+2020/05/19 23:22:17 [DEBUG] [AS3] posting request to https://192.168.200.92/mgmt/shared/appsvcs/declare/
+2020/05/19 23:22:20 [DEBUG] [AS3] Response from BIG-IP: code: 200 --- tenant:k8s --- message: success
 ```
 
 Please use the following example files in my repo below:
