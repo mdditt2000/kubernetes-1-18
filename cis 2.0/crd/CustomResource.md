@@ -12,7 +12,7 @@ This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.
 
 CIS using the following schema for CRDs
 
-![Image of Schema](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-33-54.png)
+![Image of Schema](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/crd/diagrams/2020-04-23_13-33-54.png)
 
 ## How F5 CRDs Custom Controller Works
 
@@ -21,7 +21,7 @@ CIS using the following schema for CRDs
 * Virtual Server is the primary citizen.  Any changes in Service, Endpoint, Node will indirectly affect Virtual Server
 * Worker fetches the affected Virtual Servers from Resource Queue to process them
 
-![Image of CRDs](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-00-46.png)
+![Image of CRDs](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/crd/diagrams/2020-04-23_13-00-46.png)
 
 ## Environment parameters
 
@@ -54,29 +54,28 @@ https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/usergui
 * All the overhead of LTM CCCL processing is removed
 * LTM(from AS3) and NET(from CCCL) will be created in CIS Managed Partition, which is created by User
 
-![Image of CRDs](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/diagrams/2020-04-23_13-17-43.png)
+![Image of CRDs](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%202.0/crd/diagrams/2020-04-23_13-17-43.png)
 
 **BIG-IP partition**
 
-Single Partition (Back to Awesome)
+Single Partition (Back to Awesome). Partition specified in the deployment manifest is what will be created and used on BIG-IP
 
-Still in works
-
-When using **agent=as3**, CIS will manage L4-L7 and L2-L3 with different partitions CIS would append the configured bigip-partition <partition>_AS3 suffix to partition for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
-
-When using user-defined configmap with **agent=as3**, CIS will also manage L4-L7 and L2-L3 with different partitions. CIS would use the <tenant> from the AS3 declaration for L4-L7 operation and use only bigip-partition <partition> for L2-L3 operations
+```
+- "--bigip-partition=k8s"
+```
 
 **Manage resources**
 
-Specify what resources are configured with the following three options. This guide is using user-defined configmap
+Specify what resources are configured with the following three options. This guide is using customer resource defintions customResourceMode
 
 * manageRoutes = "manage-routes", false, specify whether or not to manage Route resources
 * manageIngress = "manage-ingress", false, specify whether or not to manage Ingress resources
 * manageConfigMaps = "manage-configmaps", true, specify whether or not to manage ConfigMap resources
+* customResourceMode = "custom-resource-mode", true, specify whether or not to manage controller processes only F5 Custom Resources
 
 **CRD Alpha**
 
-Image: subbuv26/k8s-bigip-ctlr:crd_build
+Image: chandrajakkidi/k8s-bigip-ctlr:2.0.0
  
 Supports the following features:
 * Supports Custom type: VirtualServer
@@ -98,20 +97,23 @@ Configuration options available in the CIS controller using custom resource mode
 **note** that a deployment parameter needs to be given as “--custom-resource-mode=true” which deploying CIS.
 ```
 args: 
-     - "--bigip-username=$(BIGIP_USERNAME)"
-     - "--bigip-password=$(BIGIP_PASSWORD)"
-     - "--bigip-url=192.168.200.92"
-     - "--bigip-partition=k8s"
-     - "--namespace=default"
-     - "--pool-member-type=cluster" - As per code it will process as clusterIP
-     - "--flannel-name=fl-vxlan"
-     - "--log-level=DEBUG"
-     - "--insecure=true"
-     - "--manage-ingress=false"
-     - "--manage-routes=false"
-     - "--manage-configmaps=false"
-     - “--custom-resource-mode=true”
-     - "--as3-validation=true"
+          args: 
+            - "--bigip-username=$(BIGIP_USERNAME)"
+            - "--bigip-password=$(BIGIP_PASSWORD)"
+            - "--bigip-url=192.168.200.92"
+            - "--bigip-partition=k8s"
+            - "--namespace=default"
+            - "--pool-member-type=cluster"
+            - "--flannel-name=fl-vxlan"
+            - "--log-level=DEBUG"
+            - "--insecure=true"
+            - "--manage-ingress=false"
+            - "--manage-routes=false"
+            - "--manage-configmaps=false"
+            - "--custom-resource-mode=true"
+            - "--http-listen-address=0.0.0.0:8080"
+            - "--as3-validation=true"
+            - "--log-as3-response=true"
 ```
 
 ## BIG-IP credentials and RBAC Authentication
@@ -124,6 +126,13 @@ kubectl create clusterrolebinding k8s-bigip-ctlr-clusteradmin --clusterrole=clus
 kubectl create -f f5-cluster-deployment.yaml
 kubectl create -f f5-bigip-node.yaml
 ```
+
+## Create the F5 CIS schema
+
+To use CRD with CIS create the schema before creating any CRDs
+```
+```
+
 Please use the following example files in my repo below:
 
-* CIS deployment [CIS deployment repo](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%201.14/big-ip-92)
+* CIS example [CIS example repo](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%202.0/crd/big-ip-92-cluster/crd-examples)

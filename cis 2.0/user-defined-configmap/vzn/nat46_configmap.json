@@ -1,0 +1,36 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
+    "class": "AS3",
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.18.0",
+        "id": "snat_pool_for_NAT46",
+        "NAT_46": {
+            "class": "Tenant",
+            "NAT_46_app": {
+                "class": "Application",
+                "template": "generic",
+                "VS_IPv6_Serving": {
+                    "class": "Service_TCP",
+                    "virtualAddresses": [
+                        "fd6a:18ea:ca6d:c::10"
+                    ],
+                    "virtualPort": 80,
+                    "pool": "NAT_46_app_pool"
+                },
+                "NAT_46_app_pool": {
+                    "class": "Pool",
+                    "monitors": [
+                        "tcp"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 8080,
+                            "serverAddresses": []
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

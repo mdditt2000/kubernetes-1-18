@@ -31,7 +31,7 @@ spec:
             - "--bigip-username=$(BIGIP_USERNAME)"
             - "--bigip-password=$(BIGIP_PASSWORD)"
             - "--bigip-url=192.168.200.92"
-            - "--bigip-partition=k8szoneb"
+            - "--bigip-partition=k8s"
             - "--namespace=default"
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
@@ -59,6 +59,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "chandrajakkidi/k8s-bigip-ctlr:ubi_2.0_build3"
+          image: "chandrajakkidi/k8s-bigip-ctlr:2.0.0"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr
