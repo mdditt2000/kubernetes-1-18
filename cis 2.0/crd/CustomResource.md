@@ -165,4 +165,4 @@ Logs dispaly CRD created on BIG-IP using AS3 API
 
 Please use the following example files in my repo below:
 
-* CIS example [CIS example repo](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%202.0/crd/big-ip-92-cluster/crd-examples)
+* CIS example [CRD example repo](https://github.com/mdditt2000/kubernetes-1-18/tree/master/cis%202.0/crd/big-ip-92-cluster/crd-examples)
