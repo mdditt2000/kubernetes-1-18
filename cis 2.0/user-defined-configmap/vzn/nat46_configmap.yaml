@@ -16,16 +16,6 @@ data:
             "id": "snat_pool_for_NAT46",
             "NAT_46": {
                 "class": "Tenant",
-                "Shared": {
-                  "class": "Application",
-                  "template": "shared",
-                  "my_snat_pool": {
-                  "class": "SNAT_Pool",
-                  "snatAddresses": [
-                    "10.75.71.155"
-                  ] 
-                 } 
-                },
                 "NAT_46_app": {
                     "class": "Application",
                     "template": "generic",
