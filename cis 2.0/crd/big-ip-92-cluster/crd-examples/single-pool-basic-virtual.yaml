@@ -5,9 +5,8 @@ metadata:
   labels:
     f5cr: "true"
 spec:
-  host: mysite.f5demo.com
   virtualServerAddress: "10.192.75.106"
   pools:
-  - path: /foo
+  - path: /
     service: f5-hello-world
     servicePort: 8080
