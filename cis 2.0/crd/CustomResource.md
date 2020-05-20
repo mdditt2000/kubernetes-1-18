@@ -134,6 +134,15 @@ To use CRD with CIS create the schema before creating any CRDs
 [root@k8s-1-18-master crd-examples]# kubectl create -f customresourcedefinition.yaml
 customresourcedefinition.apiextensions.k8s.io/virtualservers.cis.f5.com created
 ```
+This release CRDs are alpha and therefore the ojects are limeted. The following objects are exposed by the schema
+```
+virtualServerAddress:
+pools:
+  - path: /
+    service: name
+    servicePort: ##
+
+```
 
 ## Create the CIS CRD
 Create a custom resource defintion for a simple application using the following example
