@@ -48,7 +48,7 @@ data:
                         },
                         "redirect80": true,
                         "serverTLS": {
-                            "bigip": "/Common/star.osudf.com"
+                            "bigip": "/Common/clientssl"
                         }
                     },
                     "webpool": {
