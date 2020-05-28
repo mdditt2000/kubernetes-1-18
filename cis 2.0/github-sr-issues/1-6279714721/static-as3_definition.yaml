@@ -14,7 +14,7 @@ data:
         "persist": true,
         "declaration": {
             "class": "ADC",
-            "schemaVersion": "3.10.0",
+            "schemaVersion": "3.18.0",
             "id": "d492687a-bd1d-478d-987b-9590253c5099",
             "label": "Sample AS3 with individual ASM policy",
             "remark": "Simple HTTP Service with ASM policy",
