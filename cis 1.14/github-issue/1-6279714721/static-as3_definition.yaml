@@ -1,0 +1,107 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: static-as3_definition
+  namespace: default
+  labels:
+    f5type: virtual-server
+    as3: "true"
+data:
+  template: |
+    {
+        "class": "AS3",
+        "action": "deploy",
+        "persist": true,
+        "declaration": {
+            "class": "ADC",
+            "schemaVersion": "3.10.0",
+            "id": "d492687a-bd1d-478d-987b-9590253c5099",
+            "label": "Sample AS3 with individual ASM policy",
+            "remark": "Simple HTTP Service with ASM policy",
+            "static": {
+                "class": "Tenant",
+                "static-as3": {
+                    "class": "Application",
+                    "template": "https",
+                    "serviceMain": {
+                        "class": "Service_HTTPS",
+                        "virtualAddresses": [
+                            "10.1.10.45"
+                        ],
+                        "pool": "webpool",
+                        "policyWAF": {
+                            "use": "indiviual_WAF_policy"
+                        },
+                        "securityLogProfiles": [
+                            {
+                                "bigip": "/Common/Log all requests"
+                            }
+                        ],
+                        "profileHTTP": {
+                            "use": "http_prof_mid_security"
+                        },
+                        "profileHTTPAcceleration": {
+                            "use": "my_caching"
+                        },
+                        "profileHTTPCompression": {
+                            "use": "my_compression"
+                        },
+                        "redirect80": true,
+                        "serverTLS": {
+                            "bigip": "/Common/star.osudf.com"
+                        }
+                    },
+                    "webpool": {
+                        "class": "Pool",
+                        "monitors": [
+                            "http"
+                        ],
+                        "reselectTries": 1,
+                        "members": [
+                            {
+                                "servicePort": 8080,
+                                "serverAddresses": []
+                            }
+                        ]
+                    },
+                    "http_prof_mid_security": {
+                        "class": "HTTP_Profile",
+                        "proxyType": "reverse",
+                        "allowedResponseHeaders": [
+                            "content-type",
+                            "set-cookie",
+                            "location",
+                            "date",
+                            "expires",
+                            "cache-control",
+                            "pragma",
+                            "vary",
+                            "content-encoding",
+                            "keep-alive",
+                            "connection"
+                        ],
+                        "fallbackRedirect": "https://www.f5.com",
+                        "xForwardedFor": true
+                    },
+                    "my_caching": {
+                        "class": "HTTP_Acceleration_Profile",
+                        "parentProfile": {
+                            "bigip": "/Common/webacceleration"
+                        },
+                        "maximumObjectSize": 200000,
+                        "maximumEntries": 5000,
+                        "maximumAge": 120
+                    },
+                    "my_compression": {
+                        "class": "HTTP_Compress",
+                        "minimumSize": 2000
+                    },
+                    "indiviual_WAF_policy": {
+                        "class": "WAF_Policy",
+                        "ignoreChanges": true,
+                        "url": "https://raw.githubusercontent.com/gkor75/CI-CD-demo01/master/files/ASM_policy_fundamental_for_Linux.xml"
+                    }
+                }
+            }
+        }
+    }
