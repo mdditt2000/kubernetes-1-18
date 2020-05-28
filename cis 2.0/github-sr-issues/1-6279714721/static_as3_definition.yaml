@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: static-as3_definition
+  name: static_as3_definition
   namespace: default
   labels:
     f5type: virtual-server
