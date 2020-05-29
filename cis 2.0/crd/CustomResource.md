@@ -1,12 +1,12 @@
-# Kubernetes 1.18 and Container Ingress Controller using Custom Resource Definitions 
+# Kubernetes 1.18 and Container Ingress Controller using Custom Resource Definitions
 
 This page is created to document CIS 2.0 and BIG-IP using CRD Alpha.  
 
-## What are CRDs? Custom resources are extensions of the Kubernetes API. 
+## What are CRDs? Custom resources are extensions of the Kubernetes API
 
 * A resource is an endpoint in the Kubernetes API that stores a collection of API objects of a certain kind; for example, the built-in pods resource contains a collection of Pod objects.
 * A custom resource is an extension of the Kubernetes API that is not necessarily available in a default Kubernetes installation. It represents a customization of a particular Kubernetes installation. However, many core Kubernetes functions are now built using custom resources, making Kubernetes more modular.
-*  Custom resources can appear and disappear in a running cluster through dynamic registration, and cluster admins can update custom resources independently of the cluster itself. Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
+* Custom resources can appear and disappear in a running cluster through dynamic registration, and cluster admins can update custom resources independently of the cluster itself. Once a custom resource is installed, users can create and access its objects using kubectl, just as they do for built-in resources like Pods.
 
 ## CIS CRD Schema Validation using OpenAPI
 
@@ -26,7 +26,7 @@ CIS using the following schema for CRDs
 ## Environment parameters
 
 * K8S 1.18 - one master and two worker nodes
-* CIS 2.0 beta image
+* CIS 2.0
 * AS3: 3.18
 * BIG-IP 14.1.2 (standalone deployment)
 
@@ -75,7 +75,7 @@ Specify what resources are configured with the following three options. This gui
 
 **CRD Alpha**
 
-Image: chandrajakkidi/k8s-bigip-ctlr:2.0.0
+Image: f5networks/k8s-bigip-ctlr:2.0.0
  
 Supports the following features:
 * Supports Custom type: VirtualServer
