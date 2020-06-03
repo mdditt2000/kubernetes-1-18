@@ -1,4 +1,5 @@
 # Kubernetes Example - BIGIP with Container Ingress Services
+
 F5 Container Ingress Services (CIS) integrates with Kubernetes to automate create L4/L7 services on F5 BIG-IP systems, and load balance ingress requests across the services. Monitoring Kubernetes API, CIS is able to modify the BIGIP system configuration based on changes made by the Kubernetes operator.
 
 ## About theses example / repo
@@ -8,3 +9,8 @@ F5 Container Ingress Services (CIS) integrates with Kubernetes to automate creat
 * CIS NodePort Quick Start Guide [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/QuickStartGuideNode.md)
 * CIS Deployment Guide for HA [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/cis%201.14/type-loadbalancer/QuickStartGuide.md)
 * Kubernetes CIS FAQ [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/kubernetes-faq.md)
+
+
+------
+
+* Resume [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/documents/Mark%20Dittmer%20IR%20Resume.pdf)
