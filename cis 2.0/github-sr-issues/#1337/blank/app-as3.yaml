@@ -1,0 +1,25 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-as3
+  namespace: f5-test001
+  labels:
+    f5type: virtual-server
+    as3: "true"
+data:
+  template: |
+    {
+      "class": "AS3",
+      "action": "deploy",
+      "persist": true,
+      "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.18.0",
+        "id": "123abc",
+        "label": "f5_test001",
+        "remark": "HTTP application",
+        "f5_test001": {
+          "class": "Tenant"
+        }
+      }
+    }
