@@ -1,0 +1,11 @@
+{
+    "declaration": {
+        "your-tenant_AS3": {
+            "Shared": {
+                "https_ose_vserver": {
+                    "redirect80": true
+                }
+            }
+        }
+    }
+}
