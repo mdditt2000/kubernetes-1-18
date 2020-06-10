@@ -10,7 +10,7 @@ data:
   template: |
     {
         "declaration": {
-            "ocp_AS3": {
+            "k8s_AS3": {
                 "Shared": {
                     "ingress_10_192_75_108_80": {
                         "securityLogProfiles": [
@@ -19,7 +19,7 @@ data:
                             }
                         ],
                         "policyWAF": {
-                            "bigip": "/Common/linux-low"
+                            "bigip": "/Common/WAF_Policy"
                         }
                     }
                 }
