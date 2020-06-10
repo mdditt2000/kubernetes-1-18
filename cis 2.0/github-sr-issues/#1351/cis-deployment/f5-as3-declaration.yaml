@@ -12,7 +12,7 @@ data:
         "declaration": {
             "ocp_AS3": {
                 "Shared": {
-                    "Ingress_10_1_10_12_80": {
+                    "ingress_10_192_75_108_80": {
                         "securityLogProfiles": [
                             {
                                 "bigip": "/Common/Log all requests"
