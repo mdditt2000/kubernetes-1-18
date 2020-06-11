@@ -3,9 +3,9 @@ apiVersion: v1
 metadata:
   name: f5-as3-declaration
   namespace: default
-labels:
-  f5type: virtual-server
-  overrideAS3: "true"
+  labels:
+    f5type: virtual-server
+    overrideAS3: "true"
 data:
   template: |
     {
