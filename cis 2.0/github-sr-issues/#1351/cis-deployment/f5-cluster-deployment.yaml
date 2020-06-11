@@ -40,7 +40,7 @@ spec:
             - "--insecure=true"
             - "--manage-ingress=true"
             - "--manage-routes=false"
-            - "--manage-configmaps=false"
+            - "--manage-configmaps=true"
             - "--custom-resource-mode=false"
             # AS3 override functionality
             - "--override-as3-declaration=default/f5-as3-declaration"
