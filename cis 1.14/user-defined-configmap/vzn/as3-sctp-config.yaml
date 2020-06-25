@@ -16,7 +16,7 @@ data:
             "id": "service-sctp",
             "label": "CNF_TCP",
             "remark": "A1-2 Template",
-            "vzn": {
+            "vzn-sctp": {
                 "class": "Tenant",
                 "f5_hello_world": {
                     "class": "Application",
