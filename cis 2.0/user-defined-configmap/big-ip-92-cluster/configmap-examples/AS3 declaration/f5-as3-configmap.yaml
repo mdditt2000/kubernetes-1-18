@@ -52,7 +52,7 @@ data:
                     },
                     "OWASPAutoTune": {
                         "class": "WAF_Policy",
-                        "url": "https://raw.githubusercontent.com/mdditt2000/f5-as3-declarations/master/Common_WAF_Policy.xml",
+                        "url": "https://raw.githubusercontent.com/mdditt2000/f5-as3-declarations/master/waf-policy/Common_WAF_Policy.xml",
                         "ignoreChanges": true
                     },
                     "frontside": {
