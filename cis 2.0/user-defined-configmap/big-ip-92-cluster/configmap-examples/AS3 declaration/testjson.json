@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
+    "class": "AS3",
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.11.0",
+        "id": "urn:uuid:33045210-3ab8-4636-9b2a-c98d22ab915d",
+        "label": "A6",
+        "remark": "Multiple HTTP application tied to the same virtual",
+        "AS3": {
+            "class": "Tenant",
+            "A1": {
+                "class": "Application",
+                "template": "http",
+                "serviceMain": {
+                    "class": "Service_HTTP",
+                    "virtualAddresses": [
+                        "10.192.75.106"
+                    ],
+                    "pool": "web_pool80"
+                },
+                "web_pool80": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 8080,
+                            "serverAddresses": []
+                        }
+                    ]
+                },
+                "service_on_port81": {
+                    "class": "Service_HTTP",
+                    "remark": "Accepts HTTP connections on port 81",
+                    "virtualPort": 81,
+                    "virtualAddresses": [
+                        "10.192.75.106"
+                    ],
+                    "pool": "web_pool81"
+                },
+                "web_pool81": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 81,
+                            "serverAddresses": []
+                        }
+                    ]
+                },
+                "service_on_port82": {
+                    "class": "Service_HTTP",
+                    "remark": "Accepts HTTP connections on port 82",
+                    "virtualAddresses": [
+                        "10.192.75.106"
+                    ],
+                    "virtualPort": 82,
+                    "pool": "web_pool82"
+                },
+                "web_pool82": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 82,
+                            "serverAddresses": []
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

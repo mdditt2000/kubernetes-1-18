@@ -31,20 +31,12 @@ spec:
             - "--bigip-username=$(BIGIP_USERNAME)"
             - "--bigip-password=$(BIGIP_PASSWORD)"
             - "--bigip-url=192.168.200.92"
-            - "--bigip-partition=k8szoneb"
-            - "--namespace=test2-icni-1"
-            - "--namespace=nat46"
+            - "--bigip-partition=k8s"
+            - "--namespace=default"
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
             - "--insecure=true"
-            - "--manage-ingress=false"
-            - "--manage-routes=false"
-            - "--manage-configmaps=true"
-            - "--custom-resource-mode=false"
-            - "--http-listen-address=0.0.0.0:8080"
-            - "--as3-validation=true"
-            - "--log-as3-response=true"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
@@ -60,6 +52,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "chandrajakkidi/k8s-bigip-ctlr:ubi_2.0_build3"
+          image: "f5networks/k8s-bigip-ctlr:2.0.0"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr
