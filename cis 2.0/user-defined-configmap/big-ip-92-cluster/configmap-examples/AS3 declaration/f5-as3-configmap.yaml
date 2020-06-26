@@ -18,7 +18,7 @@ data:
             "remark": "A1-5 example",
             "AS3": {
                 "class": "Tenant",
-                "demo_app": {
+                "A1": {
                     "class": "Application",
                     "template": "generic",
                     "a1_80_vs": {
