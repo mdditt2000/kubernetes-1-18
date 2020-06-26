@@ -18,11 +18,12 @@ data:
             "remark": "A1-5 example",
             "AS3": {
                 "class": "Tenant",
-                "A5": {
+                "demo_app": {
                     "class": "Application",
-                    "template": "https",
-                    "serviceMain": {
+                    "template": "generic",
+                    "a1_80_vs": {
                         "class": "Service_HTTPS",
+                        "remark": "demo_app_waf",
                         "virtualAddresses": [
                             "10.192.75.105"
                         ],
