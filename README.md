@@ -12,5 +12,3 @@ F5 Container Ingress Services (CIS) integrates with Kubernetes to automate creat
 
 
 ------
-
-* Resume [document](https://github.com/mdditt2000/kubernetes-1-18/blob/master/documents/Mark%20Dittmer%20IR%20Resume.pdf)
