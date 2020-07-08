@@ -46,6 +46,26 @@ spec:
             - "--as3-validation=true"
           command: 
             - /app/bin/k8s-bigip-ctlr
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 15
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 15
           env: 
             - 
               name: BIGIP_USERNAME
