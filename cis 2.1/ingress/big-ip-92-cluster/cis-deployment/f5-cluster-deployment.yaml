@@ -37,6 +37,7 @@ spec:
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
+            - "--log-as3-response=true"
             - "--insecure=true"
             - "--manage-ingress=true"
             - "--manage-routes=false"
