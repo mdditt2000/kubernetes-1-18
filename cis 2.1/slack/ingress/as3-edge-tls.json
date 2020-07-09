@@ -68,7 +68,7 @@
     "controls": {
         "class": "Controls",
         "userAgent": "CIS/v2.1.0-WIP K8S/v1.18.0",
-        "archiveTimestamp": "2020-07-09T22:22:27.255Z"
+        "archiveTimestamp": "2020-07-09T22:32:36.191Z"
     },
     "id": "urn:uuid:85626792-9ee7-46bb-8fc8-4ba708cfdc1d",
     "label": "CIS Declaration",
