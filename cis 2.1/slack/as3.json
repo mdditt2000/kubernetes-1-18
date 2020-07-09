@@ -1,0 +1,78 @@
+{
+    "k8s": {
+        "Shared": {
+            "class": "Application",
+            "ingress_10_192_75_108_443": {
+                "layer4": "tcp",
+                "source": "0.0.0.0/0",
+                "translateServerAddress": true,
+                "translateServerPort": true,
+                "class": "Service_HTTPS",
+                "virtualAddresses": [
+                    "10.192.75.108"
+                ],
+                "virtualPort": 443,
+                "snat": "auto",
+                "serverTLS": "ingress_10_192_75_108_443_tls_server",
+                "redirect80": false,
+                "pool": "/k8s/Shared/ingress_default_f5_hello_world"
+            },
+            "ingress_10_192_75_108_443_tls_server": {
+                "class": "TLS_Server",
+                "certificates": [
+                    {
+                        "certificate": "test_secret"
+                    }
+                ],
+                "ciphers": "DEFAULT",
+                "renegotiationEnabled": false
+            },
+            "ingress_default_f5_hello_world": {
+                "class": "Pool",
+                "loadBalancingMode": "round-robin",
+                "members": [
+                    {
+                        "addressDiscovery": "static",
+                        "serverAddresses": [
+                            "10.244.2.79"
+                        ],
+                        "servicePort": 8080
+                    },
+                    {
+                        "addressDiscovery": "static",
+                        "serverAddresses": [
+                            "10.244.2.80"
+                        ],
+                        "servicePort": 8080
+                    }
+                ]
+            },
+            "template": "shared",
+            "test_secret": {
+                "class": "Certificate",
+                "certificate": "-----BEGIN CERTIFICATE-----\nMIIC0zCCAbugAwIBAgIJAM5CklOAhW7WMA0GCSqGSIb3DQEBCwUAMAAwHhcNMTkx\nMDI0MDUxNTA1WhcNMTkxMDI1MDUxNTA1WjAAMIIBIjANBgkqhkiG9w0BAQEFAAOC\nAQ8AMIIBCgKCAQEAzTYfy6p/Xsq5ZSSy5ZVRTeezi3rXTqryCcbOA/omaAxDk1lv\nWnadc57zDBCIg4ji7mklfmuj4l+7CJhk/RfWbAt9e4iC5QFYYmlazGgiJ9OjGy/G\nESWNDehK/0gNoVaPQ6hBLMG3u9jA/ANgbgG9BXxKmug9dKyTpCJ5Cqb/j4qMqlqn\no6O2nYds1r5JwOChJ9XMXVyKGRiud2qCLkcR3/v34AyyiVmQ3zQoBqcOfPSR6v58\ny10D0ng23Njl9TwG4YmNYj6HePhRHXYxmsPnO2Ix8G8dwkxOy4SJkCsFGVMt0Ovz\nTrmTv9+/BP/jTYVQlmsNPV2aUftyScGEPZUJwQIDAQABo1AwTjAdBgNVHQ4EFgQU\nejrBESnyREgKeOgTNcpWBBDmV0kwHwYDVR0jBBgwFoAUejrBESnyREgKeOgTNcpW\nBBDmV0kwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAG7DbzPWHPwAk\nljjAIMZTKhmh8qCIXqdTogVZs0DrNRmheU4Y5b/xAUl0FpHevrPDxQcnMAh4/T2a\nxsUNy04ZBxPQOuDReuFxy07NLIcz9v9/0aKYISjE5VzY9AOqL2ULXFa6VvIvIUMm\nnQChbjrcef8oyjKsFuppk+sqCobGvImhDE4FsSqiZGmSzWGq8OXeIhJS0yM2X+8S\n09aU4/9KFqJHHfQ+9fx/+RflTuIpSiHH5DolTyUlIpg07RYoaQDrks/XPmVXQR7w\n61CVfeSDmDzHVeDWyb2lSCdq+OAyi0bq7j25n7KhuO3G17mDZw335YyNzTQK+Wed\nnuy4mnYSvQ==\n-----END CERTIFICATE-----\n",
+                "privateKey": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDNNh/Lqn9eyrll\nJLLllVFN57OLetdOqvIJxs4D+iZoDEOTWW9adp1znvMMEIiDiOLuaSV+a6PiX7sI\nmGT9F9ZsC317iILlAVhiaVrMaCIn06MbL8YRJY0N6Er/SA2hVo9DqEEswbe72MD8\nA2BuAb0FfEqa6D10rJOkInkKpv+PioyqWqejo7adh2zWvknA4KEn1cxdXIoZGK53\naoIuRxHf+/fgDLKJWZDfNCgGpw589JHq/nzLXQPSeDbc2OX1PAbhiY1iPod4+FEd\ndjGaw+c7YjHwbx3CTE7LhImQKwUZUy3Q6/NOuZO/378E/+NNhVCWaw09XZpR+3JJ\nwYQ9lQnBAgMBAAECggEBAMJNXhu0avdxEcuvzOfO0vXlzj3h6R1mhNg28fgYEedw\nvUc2ZlYMe5bvSIgC249XvC8rRcIG31zHcct4qB5wRKl207B1GCMHfA1qXfuvGbAG\nFqj2Oh8gJAeoC+Lc8XLzB6FzHYroPTTSzh+QfuyKHtSj0+wKu63OfdjqfxtT9iSM\nwZl2xv/B5SFPSpb3aB+7LXJHdVPhE7FUBt+e15Q+Vx69zS5nvYERg5TB2r9xq8tp\nR44amECBGYRh5Lxwy3DASb6rjgjrZ9/T9sM3Lpmy51lqEafA6ChwSf6WetzuhmrK\nPk1N7PeK64rMm54nyZ/SUiaAZL4r2Q7InZQYAXXBXnECgYEA/ta9VR8SmF8zaxvW\nJ1oNRhZ+nwSd55c8lBpYdaJ0VeTUkpffkFDwb0lELgZkKuyI3XGb2RjVaLCukqd7\nSX/JRzrOsANPAtGumqtTMqox6rTdI9yxyy6hEDagzej7I/DivSY3Fh/cHi5dZxpr\n3lmMb0qihvFEe76/9f43BwjT9D0CgYEAziV++0DAkwTpaIH8uGRgwKkaDiXv+TYa\nsb8OesiRRO9lgnLLCJ03ooPO4kDdbvodqbWJ54/BHpwfq4zsV36csuhj54eucXxD\ngnWo/SmBGK5Ea5+peJNP8frO6OREhalEjXb3tE49cWLj7Br/YeXs0TQCiEZxmSQr\nxR2Ws9IMT9UCgYEA+d2PcmCvGNtvTPvUNG1lSm1P5ZbfRG3TJdvXFDAfJQDjNIDY\n4WWa+WK7CO2XVUbqw0Vba7eft7BU2tKAXYZ/0ellMstrsvXo3xpQzwJ1Qw3nLfx8\nDx4/KeiGLp7bb1gG2TMZHAZNCwKm7irHzRG8Unq5dNonLbXP/eAuECWlvHkCgYB/\npPAPm3SilDQCphpaAq12Hj8n642//iRhUzAgDvkEekeckn/tgYvlcUA1EH0MLosX\nfnU5kOW/kmR50PS26IsWrJbP0k/NrWgP69MLjxuEsMNk8KP7KRwjdW2Q/2b+bGUq\nQzP1zUx2XQlMNRtU/w24LEA1KYlFjgQcNcoO5k0BUQKBgQDUUcNo58v/I+gQKqyN\nR+ubId0Dv9PLwssxSYWPcQv1gd2m6ABRM+dLrvYIEIL1093fGPopqr4rtSXRoAPQ\noUlBkWoy6WS88lb4MWZZxCPVPQBa2VOyv3dEy39rngLk882Tbu9PMyhyXSI8qhwQ\nHrRuOU/Fyo9B9cRt+PUJGTxirA==\n-----END PRIVATE KEY-----\n",
+                "chainCA": ""
+            }
+        },
+        "class": "Tenant"
+    },
+    "k8s_AS3": {
+        "Shared": {
+            "class": "Application",
+            "template": "shared"
+        },
+        "class": "Tenant"
+    },
+    "class": "ADC",
+    "controls": {
+        "class": "Controls",
+        "userAgent": "CIS/v2.1.0-WIP K8S/v1.18.0",
+        "archiveTimestamp": "2020-07-09T22:22:27.255Z"
+    },
+    "id": "urn:uuid:85626792-9ee7-46bb-8fc8-4ba708cfdc1d",
+    "label": "CIS Declaration",
+    "remark": "Auto-generated by CIS",
+    "schemaVersion": "3.20.0",
+    "updateMode": "selective"
+}
