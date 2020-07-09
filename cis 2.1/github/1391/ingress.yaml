@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    virtual-server.f5.com/health: |
+      [
+        {
+          "path": "kube-apiserver.skb-doj-dev01.btvpaas.com/",
+          "send": "HTTP GET /",
+          "interval": 5,
+          "timeout": 10
+        }
+      ]
+    virtual-server.f5.com/ip: 10.192.75.108
+  name: f5-hello-world
+spec:
+  rules:
+    - host: kube-apiserver.skb-doj-dev01.btvpaas.com
+      http:
+        paths:
+          - path: /mysite/app1
+            backend:
+              serviceName: f5-hello-world
+              servicePort: 8080
