@@ -17,6 +17,7 @@ metadata:
     ingress.kubernetes.io/allow-http: "false"
     ingress.kubernetes.io/ssl-redirect: "false"
     virtual-server.f5.com/ip: 10.192.75.108
+    virtual-server.f5.com/serverssl: /Common/serverssl
     kubernetes.io/ingress.class: "f5"
   name: f5-hello-world
 spec:
