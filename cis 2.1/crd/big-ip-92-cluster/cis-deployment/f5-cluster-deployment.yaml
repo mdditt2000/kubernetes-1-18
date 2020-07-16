@@ -59,6 +59,6 @@ spec:
                 secretKeyRef: 
                   key: password
                   name: bigip-login
-          image: "subbuv26/k8s-bigip-ctlr:crd_integrate"
+          image: "abhishekf5/k8s-bigip-ctlr:MultiAS3Configmap_Integrated_01"
           name: f5-server
       serviceAccountName: k8s-bigip-ctlr
