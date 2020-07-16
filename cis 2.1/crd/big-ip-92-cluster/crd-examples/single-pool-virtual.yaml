@@ -8,6 +8,12 @@ spec:
   host: mysite.f5demo.com
   virtualServerAddress: "10.192.75.106"
   pools:
+  - monitor:
+      interval: 20
+      recv: ""
+      send: /
+      timeout: 10
+      type: http
   - path: /
     service: f5-hello-world
     servicePort: 8080
