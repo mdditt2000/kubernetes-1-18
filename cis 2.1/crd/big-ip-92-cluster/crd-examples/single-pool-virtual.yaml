@@ -6,6 +6,7 @@ metadata:
     f5cr: "true"
 spec:
   host: mysite.f5demo.com
+  tlsProfileName: reencrypt-tls
   virtualServerAddress: "10.192.75.106"
   pools:
   - monitor:
