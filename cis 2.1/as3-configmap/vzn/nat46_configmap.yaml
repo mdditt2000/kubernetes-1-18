@@ -22,13 +22,10 @@ data:
                     "VS_IPv6_Serving": {
                         "class": "Service_TCP",
                         "virtualAddresses": [
-                                "fd6a:18ea:ca6d:c::10"
+                            "fd6a:18ea:ca6d:c::10"
                         ],
                         "virtualPort": 80,
-                        "pool": "NAT_46_app_pool",
-                        "snat": {
-                          "use": "/NAT_46/Shared/my_snat_pool"
-                        }
+                        "pool": "NAT_46_app_pool"
                     },
                     "NAT_46_app_pool": {
                         "class": "Pool",
@@ -42,7 +39,7 @@ data:
                             }
                         ]
                     }
+                }
             }
         }
-    }
     }
