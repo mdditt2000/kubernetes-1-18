@@ -1,0 +1,81 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: as3-tcp-config
+  namespace: default
+  labels:
+    f5type: virtual-server
+    as3: "true"
+data:
+  template: |
+    {
+        "class": "AS3",
+        "declaration": {
+            "class": "ADC",
+            "schemaVersion": "3.20.0",
+            "id": "service-tcp",
+            "Layer_4": {
+                "class": "Tenant",
+                "Layer_4_vs_80": {
+                    "class": "Application",
+                    "template": "generic",
+                    "VS_tcp_80": {
+                        "class": "Service_TCP",
+                        "virtualAddresses": [
+                            "35.239.225.75"
+                        ],
+                        "iRules": [
+                            {
+                                "bigip": "/Common/Proxy_Protocol_iRule"
+                            }
+                        ],
+                        "shareAddresses": true,
+                        "virtualPort": 80,
+                        "pool": "Layer_4_pool_80"
+                    },
+                    "Layer_4_pool_80": {
+                        "class": "Pool",
+                        "monitors": [
+                            "tcp"
+                        ],
+                        "members": [
+                            {
+                                "servicePort": 80,
+                                "serverAddresses": []
+                            }
+                        ]
+                    }
+                },
+                "Nginx_IC_vs_443": {
+                    "class": "Application",
+                    "template": "generic",
+                    "VS_tcp_443": {
+                        "class": "Service_TCP",
+                        "virtualAddresses": [
+                            "35.239.225.75"
+                        ],
+                        "iRules": [
+                            {
+                                "bigip": "/Common/Proxy_Protocol_iRule"
+                            }
+                        ],
+                        "shareAddresses": true,
+                        "virtualPort": 443,
+                        "pool": "Nginx_IC_pool_443"
+                    },
+                    "Nginx_IC_pool_443": {
+                        "class": "Pool",
+                        "monitors": [
+                            "tcp"
+                        ],
+                        "members": [
+                            {
+                                "servicePort": 443,
+                                "serverAddresses": []
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
