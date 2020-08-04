@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    # Specify a supported BIG-IP load balancing mode
+    # Balance to round-robin
+    # health monitoring
+    virtual-server.f5.com/http-port: "443"
+    virtual-server.f5.com/balance: "round-robin"
+    ingress.kubernetes.io/allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    virtual-server.f5.com/health: |
+        [
+          {
+            "path": "mysite.f5demo.com/",
+            "send": "HTTP GET /",
+            "interval": 5,
+            "timeout": 10
+          }
+        ]
+    virtual-server.f5.com/ip: 10.192.75.108
+  name: f5-hello-world
+spec:
+  tls:
+    # Provide the name of the Secret you want to use.
+    - secretName: /Common/clientssl
+  backend:
+    # Provide the name of a single Kubernetes Service you want to expose to external
+    # traffic using TLS
+    serviceName: f5-hello-world
+    servicePort: 8080

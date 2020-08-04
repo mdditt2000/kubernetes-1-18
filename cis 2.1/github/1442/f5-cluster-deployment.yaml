@@ -37,11 +37,6 @@ spec:
             - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
             - "--insecure=true"
-            - "--manage-ingress=false"
-            - "--manage-routes=false"
-            - "--manage-configmaps=false"
-            - "--custom-resource-mode=true"
-            - "--http-listen-address=0.0.0.0:8080"
             - "--as3-validation=true"
             - "--log-as3-response=true"
           command: 
