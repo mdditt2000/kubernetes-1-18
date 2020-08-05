@@ -38,10 +38,8 @@ spec:
             "--bigip-url=192.168.200.92",
             "--insecure=true",
             "--bigip-partition=k8s",
-            "--manage-configmaps=true",
-            "--manage-ingress=false",
             "--log-as3-response=true",
-            "--log-level=INFO",
+            "--log-level=DEBUG",
             "--namespace=cistest",
             "--pool-member-type=cluster"
             ]
