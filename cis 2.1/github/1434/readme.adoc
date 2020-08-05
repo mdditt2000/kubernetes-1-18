@@ -1,0 +1,56 @@
+= Steps to reproduce
+
+Assuming the CIS 2.1 are installed and worker correctly.
+
+0) get code
+
+~~~
+git clone https://github.com/kylinsoong/container-ingress.git
+ls container-ingress/f5-cis/issue/1434/ 
+cis.yaml	cm1.yaml	cm2.yaml	cm3.yaml	deploy.yaml
+~~~
+
+note that there are 5 yaml files exists.
+
+1) deploy 3 apps in cistet namespace
+
+~~~
+kubectl create ns cistest
+kubectl apply -f deploy.yaml
+~~~
+
+2) create 1st configmap
+
+~~~
+kubectl apply -f cm1.yaml
+~~~
+
+then check from F5 that the VS with path cistest/cistest_app-svc-1 go online
+
+3) create 2nd configmap
+
+~~~
+kubectl apply -f cm2.yaml
+~~~
+
+then check from F5 that the previous cistest/cistest_app-svc-1 vs has gone, the new VS with path cistest/cistest_app-svc-2 overwrited the VS with cistest/cistest_app-svc-1.
+
+4) create 3rd configmap
+
+~~~
+kubectl apply -f cm3.yaml
+~~~
+
+then check from F5 that the previous cistest/cistest_app-svc-2 vs has gone, the new VS with path cistest/cistest_app-svc-3 overwrited the VS with cistest/cistest_app-svc-2.
+
+5) check the total configmap from cistest
+
+~~~
+kubectl get cm -n cistest
+NAME         DATA   AGE
+cistest100   1      8m57s
+cistest101   1      6m58s
+cistest102   1      70s
+~~~ 
+
+note that 3 configmaps existes in cistest.
