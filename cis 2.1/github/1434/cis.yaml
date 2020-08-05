@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-bigip-ctlr
+  name: k8s-bigip-ctlr-deployment
   namespace: bigip-ctlr
   labels:
     app: k8s-bigip-ctlr
@@ -35,7 +35,7 @@ spec:
           args: [
             "--bigip-username=$(BIGIP_USERNAME)",
             "--bigip-password=$(BIGIP_PASSWORD)",
-            "--bigip-url=192.168.5.20",
+            "--bigip-url=192.168.200.92",
             "--insecure=true",
             "--bigip-partition=k8s",
             "--manage-configmaps=true",
