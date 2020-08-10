@@ -68,7 +68,7 @@ Example of ConfigMap with iApp
         }
         }
 
-Example of ConfigMap with AS3 for mu
+Example of AS3 ConfigMap with AS3 for tenant k8s_app
 
     kind: ConfigMap
     apiVersion: v1
@@ -126,3 +126,7 @@ Example of ConfigMap with AS3 for mu
                 }
             }
         }
+
+# Upgrading from CIS 1.14 using CCCL to AS3
+# Removing of _AS3 partition
+# CIS and AS3 support schema versions
