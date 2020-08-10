@@ -128,5 +128,19 @@ Example of AS3 ConfigMap with AS3 for tenant k8s_app
         }
 
 # Upgrading from CIS 1.14 using CCCL to AS3
+
+In CIS v2.0 the default agent changed from CCCL to AS3. When upgrade from CIS 1.x to CIS 2.x and wanting to continue using agent CCCL, specify the CCCL agent type as –agent=CCCL argument in the CIS deployment yaml.
+
+If moving to AS3 agent the AS3 Extension is required to be installed on BIG-IP. Follow the following document to install AS3 Extension on BIG-IP:
+
+## Install AS3 on BIGIP
+https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html
+
+Using CIS 2.x with Ingress or Routes with agent AS3, CIS 2.1 will use the CIS base partition.
+
 # Removing of _AS3 partition
+As mentioned above uses using CIS 2.x with Ingress or Routes with agent AS3, CIS 2.1 will use the CIS base partition.
+
 # CIS and AS3 support schema versions
+
+CIS 2.1 support AS3-20 and below. If using AS3-21 please update CIS with the following patch specified in Github issue https://github.com/F5Networks/k8s-bigip-ctlr/issues/1433
