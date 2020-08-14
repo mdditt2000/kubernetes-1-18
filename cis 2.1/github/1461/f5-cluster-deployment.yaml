@@ -33,19 +33,40 @@ spec:
             - "--bigip-url=192.168.200.92"
             - "--bigip-partition=k8s"
             - "--namespace=default"
+            - "--namespace=monitoring"
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
+            - "--log-as3-response=true"
             - "--insecure=true"
-            - "--manage-ingress=false"
+            - "--manage-ingress=true"
             - "--manage-routes=false"
             - "--manage-configmaps=false"
-            - "--custom-resource-mode=true"
+            - "--custom-resource-mode=false"
             - "--http-listen-address=0.0.0.0:8080"
             - "--as3-validation=true"
-            - "--log-as3-response=true"
           command: 
             - /app/bin/k8s-bigip-ctlr
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 15
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+                path: /health
+                port: 8080
+                scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 15
           env: 
             - 
               name: BIGIP_USERNAME
