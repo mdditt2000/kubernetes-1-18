@@ -39,9 +39,6 @@ spec:
             - "--log-as3-response=true"
             - "--insecure=true"
             - "--manage-ingress=true"
-            - "--manage-routes=false"
-            - "--manage-configmaps=false"
-            - "--custom-resource-mode=false"
             - "--as3-validation=true"
           command: 
             - /app/bin/k8s-bigip-ctlr
