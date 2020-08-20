@@ -14,7 +14,7 @@ data:
       "persist": true,
       "declaration": {
         "class": "ADC",
-        "schemaVersion": "3.21.0",
+        "schemaVersion": "3.20.0",
         "id": "Github-1461",
         "Github-1461": {
           "class": "Tenant",
