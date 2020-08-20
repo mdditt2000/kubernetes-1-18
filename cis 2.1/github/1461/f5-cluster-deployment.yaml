@@ -40,7 +40,7 @@ spec:
             - "--insecure=true"
             - "--manage-ingress=true"
             - "--manage-routes=false"
-            - "--manage-configmaps=false"
+            - "--manage-configmaps=true"
             - "--custom-resource-mode=false"
             - "--as3-validation=true"
           command: 
