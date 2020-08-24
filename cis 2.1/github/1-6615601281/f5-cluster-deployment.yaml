@@ -43,6 +43,7 @@ spec:
             - "--manage-configmaps=false"
             - "--custom-resource-mode=false"
             - "--as3-validation=true"
+            - "--as3-post-delay=120"
           command: 
             - /app/bin/k8s-bigip-ctlr
           livenessProbe:
