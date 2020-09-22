@@ -13,11 +13,9 @@ data:
             "k8s": {
                 "Shared": {
                     "ingress_10_192_75_108_80": {
-                        "securityLogProfiles": [
-                            {
-                                "bigip": "/Common/Log all requests"
-                            }
-                        ],
+                        "profileTrafficLog": {
+                            "use": "/Common/Shared/telemetry_traffic_log_profile"
+                        },
                         "persistenceMethods": [],
                         "serviceDownImmediateAction": "drop"
                     }
