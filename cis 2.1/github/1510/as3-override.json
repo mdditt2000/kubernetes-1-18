@@ -1,0 +1,15 @@
+{
+    "declaration": {
+        "k8s": {
+            "Shared": {
+                "https_ose_vserver": {
+                    "profileTrafficLog": {
+                        "use": "/Common/Shared/telemetry_traffic_log_profile"
+                    },
+                    "persistenceMethods": [],
+                    "serviceDownImmediateAction": "drop"
+                }
+            }
+        }
+    }
+}
