@@ -2,7 +2,7 @@
     "declaration": {
         "k8s": {
             "Shared": {
-                "https_ose_vserver": {
+                "ingress_10_192_75_108_80": {
                     "profileTrafficLog": {
                         "use": "/Common/Shared/telemetry_traffic_log_profile"
                     },
