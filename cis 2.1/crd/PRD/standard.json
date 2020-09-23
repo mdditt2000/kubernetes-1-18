@@ -1,0 +1,46 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.0.0",
+    "id": "f5-standard-tcp-lb_v2.0.004",
+    "label": "Sample 3",
+    "remark": "f5-standard-tcp-lb",
+    "standard_TCP": {
+        "class": "Tenant",
+        "A1": {
+            "class": "Application",
+            "template": "generic",
+            "MyApp": {
+                "class": "Service_TCP",
+                "virtualAddresses": [
+                    "192.168.100.62"
+                ],
+                "profileL4": "basic",
+                "virtualPort": 81,
+                "pool": "svc_pool"
+            },
+            "svc_pool": {
+                "class": "Pool",
+                "monitors": [
+                    {
+                        "use": "tcp_monitor"
+                    }
+                ],
+                "members": [
+                    {
+                        "servicePort": 8080,
+                        "serverAddresses": [
+                            "10.128.0.209"
+                        ]
+                    }
+                ]
+            },
+            "tcp_monitor": {
+                "class": "Monitor",
+                "monitorType": "tcp",
+                "targetPort": 8080,
+                "send": "",
+                "receive": ""
+            }
+        }
+    }
+}
