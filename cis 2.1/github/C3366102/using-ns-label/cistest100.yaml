@@ -4,6 +4,7 @@ metadata:
   name: cistest100
   namespace: cistest100
   labels:
+    cis: cistest
     f5type: virtual-server
     as3: "true"
 data:
