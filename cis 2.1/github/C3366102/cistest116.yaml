@@ -1,8 +1,8 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: cis-perf-test
-  namespace: cistest100
+  name: cistest116
+  namespace: cistest116
   labels:
     f5type: virtual-server
     as3: "true"
@@ -18,16 +18,16 @@ data:
         "id": "cis-perf-test",
         "label": "cis_perf_test",
         "remark": "HTTP application",
-        "cistest100": {
+        "cistest116": {
           "class": "Tenant",
-          "cistest100": {
+          "cistest116": {
             "class": "Application",
             "template": "generic",
             "app_svc_vs": {
               "class": "Service_HTTP",
               "persistenceMethods": [ "cookie" ],
               "virtualAddresses": [
-                "10.192.75.109"
+                "10.1.10.19"
               ],
               "profileHTTP": {
                 "use": "customHTTPProfile"
@@ -37,7 +37,7 @@ data:
               },
               "snat": "self",
               "virtualPort": 80,
-              "pool": "cistest100_app_svc_pool"
+              "pool": "cistest116_app_svc_pool"
             },
             "customHTTPProfile": {
               "class": "HTTP_Profile",
@@ -47,7 +47,7 @@ data:
               "class": "Multiplex_Profile",
               "sourceMask": "255.255.255.255"
             },
-            "cistest100_app_svc_pool": {
+            "cistest116_app_svc_pool": {
               "class": "Pool",
               "monitors": [
                 "tcp",
