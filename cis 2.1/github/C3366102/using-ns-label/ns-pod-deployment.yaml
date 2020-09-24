@@ -101,6 +101,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest102
 ---
 apiVersion: apps/v1
@@ -149,6 +151,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest103
 ---
 apiVersion: apps/v1
@@ -197,6 +201,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest104
 ---
 apiVersion: apps/v1
@@ -245,6 +251,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest105
 ---
 apiVersion: apps/v1
@@ -293,6 +301,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest106
 ---
 apiVersion: apps/v1
@@ -341,6 +351,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest107
 ---
 apiVersion: apps/v1
@@ -389,6 +401,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest108
 ---
 apiVersion: apps/v1
@@ -437,6 +451,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest109
 ---
 apiVersion: apps/v1
@@ -485,6 +501,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest110
 ---
 apiVersion: apps/v1
@@ -533,6 +551,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest111
 ---
 apiVersion: apps/v1
@@ -581,6 +601,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest112
 ---
 apiVersion: apps/v1
@@ -629,6 +651,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest113
 ---
 apiVersion: apps/v1
@@ -677,6 +701,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest114
 ---
 apiVersion: apps/v1
@@ -725,6 +751,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest115
 ---
 apiVersion: apps/v1
@@ -773,6 +801,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest116
 ---
 apiVersion: apps/v1
@@ -821,6 +851,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest117
 ---
 apiVersion: apps/v1
@@ -869,6 +901,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest118
 ---
 apiVersion: apps/v1
@@ -917,6 +951,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest119
 ---
 apiVersion: apps/v1
@@ -965,6 +1001,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest120
 ---
 apiVersion: apps/v1
@@ -1013,6 +1051,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest121
 ---
 apiVersion: apps/v1
@@ -1061,6 +1101,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest122
 ---
 apiVersion: apps/v1
@@ -1109,6 +1151,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest123
 ---
 apiVersion: apps/v1
@@ -1157,6 +1201,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest124
 ---
 apiVersion: apps/v1
@@ -1205,6 +1251,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest125
 ---
 apiVersion: apps/v1
@@ -1253,6 +1301,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest126
 ---
 apiVersion: apps/v1
@@ -1301,6 +1351,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest127
 ---
 apiVersion: apps/v1
@@ -1349,6 +1401,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest128
 ---
 apiVersion: apps/v1
@@ -1397,6 +1451,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest129
 ---
 apiVersion: apps/v1
@@ -1445,6 +1501,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest130
 ---
 apiVersion: apps/v1
@@ -1493,6 +1551,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest131
 ---
 apiVersion: apps/v1
@@ -1541,6 +1601,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest132
 ---
 apiVersion: apps/v1
@@ -1589,6 +1651,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest133
 ---
 apiVersion: apps/v1
@@ -1637,6 +1701,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest134
 ---
 apiVersion: apps/v1
@@ -1685,6 +1751,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest135
 ---
 apiVersion: apps/v1
@@ -1733,6 +1801,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest136
 ---
 apiVersion: apps/v1
@@ -1781,6 +1851,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest137
 ---
 apiVersion: apps/v1
@@ -1829,6 +1901,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest138
 ---
 apiVersion: apps/v1
@@ -1877,6 +1951,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest139
 ---
 apiVersion: apps/v1
@@ -1925,6 +2001,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest140
 ---
 apiVersion: apps/v1
@@ -1973,6 +2051,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest141
 ---
 apiVersion: apps/v1
@@ -2021,6 +2101,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest142
 ---
 apiVersion: apps/v1
@@ -2069,6 +2151,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest143
 ---
 apiVersion: apps/v1
@@ -2117,6 +2201,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest144
 ---
 apiVersion: apps/v1
@@ -2165,6 +2251,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest145
 ---
 apiVersion: apps/v1
@@ -2213,6 +2301,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest146
 ---
 apiVersion: apps/v1
@@ -2261,6 +2351,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest147
 ---
 apiVersion: apps/v1
@@ -2309,6 +2401,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest148
 ---
 apiVersion: apps/v1
@@ -2357,6 +2451,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest149
 ---
 apiVersion: apps/v1
@@ -2405,6 +2501,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest150
 ---
 apiVersion: apps/v1
@@ -2453,6 +2551,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest151
 ---
 apiVersion: apps/v1
@@ -2501,6 +2601,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest152
 ---
 apiVersion: apps/v1
@@ -2549,6 +2651,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest153
 ---
 apiVersion: apps/v1
@@ -2597,6 +2701,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest154
 ---
 apiVersion: apps/v1
@@ -2645,6 +2751,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest155
 ---
 apiVersion: apps/v1
@@ -2693,6 +2801,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest156
 ---
 apiVersion: apps/v1
@@ -2741,6 +2851,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest157
 ---
 apiVersion: apps/v1
@@ -2789,6 +2901,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest158
 ---
 apiVersion: apps/v1
@@ -2837,6 +2951,8 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    cis: cistest
   name: cistest159
 ---
 apiVersion: apps/v1
