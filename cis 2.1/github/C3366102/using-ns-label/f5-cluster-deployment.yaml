@@ -38,6 +38,7 @@ spec:
             - "--log-level=DEBUG"
             - "--insecure=true"
             - "--log-as3-response=true"
+            - "--as3-post-delay=120"
           command: 
             - /app/bin/k8s-bigip-ctlr
           env: 
