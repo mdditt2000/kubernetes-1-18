@@ -32,7 +32,7 @@ spec:
             - "--bigip-password=$(BIGIP_PASSWORD)"
             - "--bigip-url=192.168.200.92"
             - "--bigip-partition=k8s"
-            - "--namespace-label=cis=ciscotest"
+            - "--namespace-label=cis=cistest"
             - "--pool-member-type=cluster"
             - "--flannel-name=fl-vxlan"
             - "--log-level=DEBUG"
