@@ -34,6 +34,7 @@ spec:
             - "--bigip-partition=k8s"
             - "--namespace=cistest100"
             - "--namespace=cistest101"
+            - "--namespace=cistest102"
             - "--namespace=cistest103"
             - "--namespace=cistest104"
             - "--namespace=cistest105"
