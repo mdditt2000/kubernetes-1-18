@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: as3-override
+  namespace: default
+  labels:
+    f5type: virtual-server
+    overrideAS3: "true"  # set to true to process this configMap. For staging set to false.
+data:
+  template: |
+    {
+        "declaration": {
+            "k8s": {
+                "Shared": {
+                    "ingress_10_192_75_111_443": {
+                        "virtualAddresses": [
+                            "10.192.75.112"
+                        ]
+                    }
+                }
+            }
+        }
+    }
