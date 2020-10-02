@@ -1,3 +1,4 @@
+```
 kubectl create -f cistest101.yaml
 kubectl create -f cistest102.yaml
 kubectl create -f cistest103.yaml
@@ -57,3 +58,4 @@ kubectl create -f cistest156.yaml
 kubectl create -f cistest157.yaml
 kubectl create -f cistest158.yaml
 kubectl create -f cistest159.yaml
+```

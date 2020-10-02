@@ -1,3 +1,4 @@
+```
 kubectl delete -f cistest101.yaml
 kubectl delete -f cistest102.yaml
 kubectl delete -f cistest103.yaml
@@ -57,3 +58,4 @@ kubectl delete -f cistest156.yaml
 kubectl delete -f cistest157.yaml
 kubectl delete -f cistest158.yaml
 kubectl delete -f cistest159.yaml
+```
