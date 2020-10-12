@@ -23,8 +23,8 @@ Github issue https://github.com/F5Networks/k8s-bigip-ctlr/issues/797
 **Solution:** Use the label node to create a new label for the node. This works in conjunction with the node-label-selector configured in CIS to only add nodes to the pool with the associated . In this quick start guide CIS will only add the nodes with label worker to the pool. Excluding the master node from the pool
 
 ```
-kubectl label nodes k8s-1-18-node1.example.com node-role.kubernetes.io/f5role=worker
-kubectl label nodes k8s-1-18-node2.example.com node-role.kubernetes.io/f5role=worker
+kubectl label nodes k8s-1-18-node1.example.com f5role=worker
+kubectl label nodes k8s-1-18-node2.example.com f5role=worker
 ```
 
 Show the node labels
